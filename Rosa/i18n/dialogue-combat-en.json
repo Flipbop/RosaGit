@@ -1,0 +1,212 @@
+{
+    "TookDamage": {
+        "Basic": [
+            [ "Nothing that can't be repaired." ],
+            [ "Not too bad." ],
+            [ "Easy fix." ]
+        ],
+        "Dizzy": [
+            /*Cleo*/ "Where are our shields?",
+            /*Dizzy*/ "I'm on it!"
+        ],
+        "Riggs": [
+            /*CLeo*/ "Where are our shields?",
+            /*Riggs*/ "Just move out of the way!"
+        ],
+        "Isaac": [
+            /*Isaac*/ "Not good!",
+            /*Cleo*/ "Calm down, we're fine!"
+        ],
+        "Drake": [
+            /*Drake*/ "Rude.",
+            /*Cleo*/ "Agreed."
+        ],
+        "Max": [
+            /*Max*/ "I really hope that didn't hit anything vital.",
+            /*Cleo*/ "Ditto."
+        ],
+        "Books": [
+            /*Cleo*/ "You okay, Books?",
+            /*Books*/ "Yep! All good!"
+        ],
+        "CAT": [
+            /*Cleo*/ "I think I can repair that",
+            /*CAT*/ "I really hope so."
+        ]
+    },
+    "TookNonHullDamage": {
+        "Basic": [
+            [ "No big deal." ]
+        ]
+    },
+    "DealtDamage": {
+        "Basic": [
+            [ "This is easy." ],
+            [ "Nice!" ],
+            [ "Very good." ],
+            [ "Works for me." ]
+        ],
+        "Dizzy": [
+            /*Dizzy*/ "Nice shot!",
+            /*Cleo*/ "It's nothing."
+        ],
+        "Riggs": [
+            /*Cleo*/ "Right on the mark!",
+            /*Riggs*/ "Yes!"
+        ],
+        "Peri": [
+            /*Peri*/ "Well done.",
+            /*Cleo*/ "Thank you."
+        ],
+        "Isaac": [
+            /*Isaac*/ "Sweet!",
+            /*Cleo*/ "Easy peasy."
+        ],
+        "Drake": [
+            /*Cleo*/ "Feels good.",
+            /*Drake*/ "Sure does."
+        ],
+        "Max": [
+            /*Cleo*/ "That's gotta hurt!",
+            /*Max*/ "Gottem!"
+        ],
+        "Books": [
+            /*Cleo*/ "Great job!",
+            /*Books*/ "Yay!"
+        ],
+        "CAT": [
+            /*CAT*/ "And there's more where that came from!",
+            /*Cleo*/ "I'll be glad to dish it out'."
+        ]
+    },
+    "DealtBigDamage": {
+        "Basic": [
+            [ "Hooah..." ],
+            [ "Nothing personal." ],
+            [ "You're in our way." ]
+        ]
+    },
+    "ShieldedDamage": {
+        "Basic": [
+            [ "These shields really make up for the lack of hull." ]
+        ]
+    },
+    "Missed": {
+        "Basic": [
+            [ "..." ],
+            [ "Try again?" ],
+            [ "Seriously?" ]
+        ]
+    },
+    "AboutToDie": {
+        "Basic": [
+            [ "Come on..." ],
+            [ "Not now..." ],
+            [ "Hang in there." ]
+        ],
+        "Dizzy": [
+            /*Dizzy*/ "We are too close.",
+            /*Cleo*/ "Shields up!"
+        ],
+        "Riggs": [
+            /*Riggs*/ "It was fun while it lasted...",
+            /*Cleo*/ "We're not done yet!"
+        ],
+        "Peri": [
+            /*Peri*/ "Not dead yet!",
+            /*Cleo*/ "Getting there!"
+        ],
+        "Isaac": [
+            /*Cleo*/ "I don't want to be a downer, but this is bad.",
+            /*Isaac*/ "No kidding."
+        ],
+        "Drake": [
+            /*Cleo*/ "Not the greatest situation.",
+            /*Drake*/ "Obviously."
+        ],
+        "Books": [
+            /*Cleo*/ "I'm sorry, Books.",
+            /*Books*/ "It's not your fault."
+        ],
+        "CAT": [
+            /*Cleo*/ "This is gonna take a while to fix.",
+            /*CAT*/ "Get started!"
+        ]
+    },
+    "HitArmor": {
+        "Basic": [
+            [ "Dang armor always in the way." ]
+        ]
+    },
+    "ExcessEnergy": {
+        "Basic": [
+            [ "What do we do with the extra juice?" ]
+        ]
+    },
+    "EmptyHand": {
+        "Basic": [
+            [ "Need more." ]
+        ]
+    },
+    "TrashHand": {
+        "Basic": [
+            [ "This is gross." ]
+        ]
+    },
+    "StartedBattle": {
+        "Basic": [
+            [ "I can work with this." ]
+        ]
+    },
+    "NoOverlap": {
+        "Basic": [
+            [ "Buh-bye!" ],
+            [ "Good riddance." ]
+        ]
+    },
+    "NoOverlapButSeeker": {
+        "Basic": [
+            [ "That seeker is going to become an issue." ],
+            [ "And how do we plan on dealing with the seeker?" ]
+        ]
+    },
+    "LongFight": {
+        "Basic": [
+            [ "Wow this is slow." ],
+            [ "Max was right, these things DO have solitaire!" ]
+        ]
+    },
+    "ReturningFromMissing": {
+        "Basic": [
+            [ "Back in action." ]
+        ]
+    },
+    "GoingToOverheat": {
+        "Basic": [
+            [ "I'm not a fan of this temperature." ],
+            [ "Where is an air conditioner when you need one?" ]
+        ],
+        "Drake": [
+            /*Cleo*/ "Eunice, you know not to cross me.",
+            /*Drake*/ "Calm down, Cleo. It's just a little heat."
+        ]
+    },
+    "Recalibrator": {
+        "Basic": [
+            [ "No problem." ]
+        ]
+    },
+    "StartedBattleAgainstDuncan": [
+        /*Cleo*/ "Just how many rocks do you have?",
+        /*Duncan*/ "I'm not sure..."
+    ],
+    "StartedBattleAgainstDahlia": [
+        /*Dahlia*/ "Here's a fresh batch of missiles, on the house!",
+        /*Cleo*/ "That's nothing compared to my old ship."
+    ],
+    "StartedBattleAgainstBigCrystal": [
+        "Ah. Big crystal."
+    ],
+    "CrabFacts1_Multi_0": "That only kind of makes sense?",
+    "CrabFacts2_Multi_0": "Are you sure you know what you're talking about?"
+}

@@ -1,0 +1,17 @@
+{
+    "Played": {
+        "SmallRepairs": [
+            "I can fix it!"
+        ],
+        "ApologizeNextLoop": [
+            [ "Apologize. I'm not asking." ],
+            [ "Goodbye." ],
+            [ "You thought you stood a chance?" ]
+        ],
+        "SeekerBarrage": [
+            [ "Dodge this." ],
+            [ "Enough playing around." ],
+            [ "Goodbye." ]
+        ]
+    }
+}

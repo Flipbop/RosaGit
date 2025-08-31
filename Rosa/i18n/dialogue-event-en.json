@@ -1,0 +1,110 @@
+{
+    "GrandmaShop": "Do you have any red velvet cake?",
+    "LoseCharacterCard": "Oh. Well would you look at that.",
+    "LoseCharacterCard_{{CharacterType}}": [ "Could have been worse!" ],
+    "CrystallizedFriendEvent": "Just drop me off at the next repair yard.",
+    "CrystallizedFriendEvent_{{CharacterType}}": [ "Back to business." ],
+    "ShopKeepBattleInsult": "Oh, so this is how it feels.",
+    "ChoiceCardRewardOfYourColorChoice_{{CharacterType}}": [
+        /*Cleo*/ "You guys just live with this?",
+        /*CAT*/ "Energy readings are back to normal."
+    ],
+    "DraculaTime": "Hello Dracula. Long time no see.",
+    "Shop": [
+        [
+            "Back to work.",
+            "What do we need?"
+        ],
+        [
+            "Home sweet home.",
+            "What do we need?"
+        ], 
+        [
+            "Not sure how I could do that, now that I'm on your side.",
+            "I guess I could get Kiwi to pilot it if you really want to."
+        ],
+        [
+            "Good call.",
+            "Do we still need anything?"
+        ],
+        [
+            "We gotta be more careful."
+        ],
+        [
+            "Hull restored. Let's get going."
+        ],
+        [
+            "Could have patched up our hull..."
+        ], 
+        [
+            "Okay I guess..."
+        ],
+        [
+            "You sure? We could always use something."
+        ],
+        [
+            "All gone!"
+        ],
+        [
+            "Two for the price of one!"
+        ],
+        [
+            "This will go great with my setup!"
+        ],
+        [
+            "Done!"
+        ],
+        [
+            "How is this gonna work, now that you're with us?",
+            "I left my tools in my workshop. I'll just use those.",
+            "What do we need?"
+        ],
+        [
+            "How does your workshop keep moving around if you aren't there to pilot it?",
+            "I have Kiwi do all the work.",
+            "What do we need?"
+        ],
+        [
+            "Do you have any boba in your workshop?",
+            "No.",
+            "What do we need, other than boba apparently?"
+        ],
+        [
+            "Thank you for helping us as much as you have.",
+            "Of course!",
+            "What do we need?"
+        ],
+        [
+            "Finally. I was hoping we would run into one of these soon.",
+            "They are pre-programmed, you know?",
+            "Oh right.",
+            "What do we need?"
+        ],
+        [
+            "I'm trusting you, Eunice. Don't steal anything just cause I'm on your team this time.",
+            "Yes ma'am.",
+            "Good. What do we need?"
+        ],
+        [
+            "Something isn't right about this. Like we modified this loop somehow.",
+            "Nah, this is perfectly normal.",
+            "What do we need?"
+        ],
+        [
+            "Thank you, Ms. Cleo!",
+            "You're welcome Books!",
+            "What do we need?"
+        ],
+        [
+            "...",
+            "Ah, right.",
+            "The consequences of our actions.",
+            "Why did we destroy my ship again?",
+            "Hubris? Lets get going."
+        ]
+    ],
+    "Soggins_Infinite": "Who gave you that USB?",
+    "Soggins_Missile_Shout_1": "I told you not to plug that USB in!",
+    "SogginsEscapeIntent_1": "Don't forget who saved you!",
+    "SogginsEscape_1": "That's not an option."
+}
