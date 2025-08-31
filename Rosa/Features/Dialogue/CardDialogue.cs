@@ -1,7 +1,7 @@
 ﻿using Nickel;
 using System.Collections.Generic;
 
-namespace Flipbop.Cleo;
+/*namespace Flipbop.Rosa;
 
 internal sealed class CardDialogue : BaseDialogue
 {
@@ -56,4 +56,4 @@ internal sealed class CardDialogue : BaseDialogue
 				],
 			};
 	}
-}
+}*/

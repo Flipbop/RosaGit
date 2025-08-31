@@ -106,13 +106,13 @@
     "/Users/christopherfranson/.nuget/packages/": {}
   },
   "project": {
-    "version": "1.1.5",
+    "version": "0.0.1",
     "restore": {
-      "projectUniqueName": "/Users/christopherfranson/Desktop/Cobalt Core Mods/CleoGit/Cleo/Cleo.csproj",
-      "projectName": "Cleo",
-      "projectPath": "/Users/christopherfranson/Desktop/Cobalt Core Mods/CleoGit/Cleo/Cleo.csproj",
+      "projectUniqueName": "/Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/Rosa.csproj",
+      "projectName": "Rosa",
+      "projectPath": "/Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/Rosa.csproj",
       "packagesPath": "/Users/christopherfranson/.nuget/packages/",
-      "outputPath": "/Users/christopherfranson/Desktop/Cobalt Core Mods/CleoGit/Cleo/obj/",
+      "outputPath": "/Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/christopherfranson/.nuget/NuGet/NuGet.Config"

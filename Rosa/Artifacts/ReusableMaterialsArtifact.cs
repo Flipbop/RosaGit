@@ -2,7 +2,7 @@
 using Nickel;
 using System.Reflection;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal sealed class ReusableMaterialsArtifact : Artifact, IRegisterable
 {
@@ -13,7 +13,7 @@ internal sealed class ReusableMaterialsArtifact : Artifact, IRegisterable
 			ArtifactType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				owner = ModEntry.Instance.CleoDeck.Deck,
+				owner = ModEntry.Instance.RosaDeck.Deck,
 				pools = ModEntry.GetArtifactPools(MethodBase.GetCurrentMethod()!.DeclaringType!)
 			},
 			Sprite = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/Artifacts/ReusableMaterials.png")).Sprite,

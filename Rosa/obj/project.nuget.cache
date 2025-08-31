@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "g5tc0Y9xNbI=",
+  "dgSpecHash": "Q6NbxLMMA9M=",
   "success": true,
-  "projectFilePath": "/Users/christopherfranson/Desktop/Cobalt Core Mods/CleoGit/Cleo/Cleo.csproj",
+  "projectFilePath": "/Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/Rosa.csproj",
   "expectedPackageFiles": [
     "/Users/christopherfranson/.nuget/packages/enumbynamesourcegenerator/1.1.2/enumbynamesourcegenerator.1.1.2.nupkg.sha512",
     "/Users/christopherfranson/.nuget/packages/fayti1703.assemblytasks/1.1.0/fayti1703.assemblytasks.1.1.0.nupkg.sha512",

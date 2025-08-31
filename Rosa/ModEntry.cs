@@ -7,29 +7,23 @@ using Shockah.Kokoro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shockah.Johnson;
-using Shockah.Soggins;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 public sealed class ModEntry : SimpleMod
 {
 	internal static ModEntry Instance { get; private set; } = null!;
-	internal readonly ICleoApi Api = new ApiImplementation();
+	internal readonly IRosaApi Api = new ApiImplementation();
 
 	internal IHarmony Harmony { get; }
 	internal IKokoroApi.IV2 KokoroApi { get; }
-	internal IDuoArtifactsApi? DuoArtifactsApi { get; }
-	internal IJohnsonApi? IJohnsonApi { get; private set; }
-
-	internal ISogginsApi? ISogginsApi { get; private set; }
+	//internal IDuoArtifactsApi? DuoArtifactsApi { get; }
 
 	internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
 	internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
 
-	internal IDeckEntry CleoDeck { get; }
-	internal IPlayableCharacterEntryV2 CleoCharacter { get; }
-	internal INonPlayableCharacterEntryV2 KiwiCharacter { get; }
+	internal IDeckEntry RosaDeck { get; }
+	internal IPlayableCharacterEntryV2 RosaCharacter { get; }
 	internal ISpriteEntry ImproveAIcon { get; }
 	internal ISpriteEntry ImproveBIcon { get; }
 	internal ISpriteEntry ImpairedIcon { get; }
@@ -93,7 +87,7 @@ public sealed class ModEntry : SimpleMod
 	];
 
 	internal static IEnumerable<Type> AllCardTypes { get; }
-		= [..CommonCardTypes, ..UncommonCardTypes, ..RareCardTypes, typeof(CleoExeCard), ..SpecialCardTypes];
+		= [..CommonCardTypes, ..UncommonCardTypes, ..RareCardTypes, typeof(RosaExeCard), ..SpecialCardTypes];
 
 	internal static IReadOnlyList<Type> CommonArtifacts { get; } = [
 		typeof(EnhancedToolsArtifact),
@@ -109,7 +103,7 @@ public sealed class ModEntry : SimpleMod
 		typeof(PowerEchoArtifact), 
 	];
 
-	internal static IReadOnlyList<Type> DuoArtifacts { get; } = [
+	/*internal static IReadOnlyList<Type> DuoArtifacts { get; } = [
 		typeof(CleoBooksArtifact),
 		typeof(CleoCatArtifact),
 		typeof(CleoDizzyArtifact),
@@ -120,7 +114,7 @@ public sealed class ModEntry : SimpleMod
 		typeof(CleoRiggsArtifact), 
 		typeof(CleoJohnsonArtifact),
 		typeof(CleoSogginsArtifact),
-	];
+	];*/
 
 	internal static IEnumerable<Type> AllArtifactTypes
 		=> [..CommonArtifacts, ..BossArtifacts];
@@ -128,8 +122,8 @@ public sealed class ModEntry : SimpleMod
 	internal static readonly IEnumerable<Type> RegisterableTypes
 		= [..AllCardTypes, ..AllArtifactTypes];
 
-	internal static readonly IEnumerable<Type> LateRegisterableTypes
-		= DuoArtifacts;
+	/*internal static readonly IEnumerable<Type> LateRegisterableTypes
+		= DuoArtifacts;*/
 
 	public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
 	{
@@ -142,18 +136,15 @@ public sealed class ModEntry : SimpleMod
 		Instance = this;
 		Harmony = helper.Utilities.Harmony;
 		KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!.V2;
-		DuoArtifactsApi = helper.ModRegistry.GetApi<IDuoArtifactsApi>("Shockah.DuoArtifacts");
+		//DuoArtifactsApi = helper.ModRegistry.GetApi<IDuoArtifactsApi>("Shockah.DuoArtifacts");
 
 		helper.Events.OnModLoadPhaseFinished += (_, phase) =>
 		{
 			if (phase != ModLoadPhase.AfterDbInit)
 				return;
-			
-			IJohnsonApi = helper.ModRegistry.GetApi<IJohnsonApi>("Shockah.Johnson");
-			ISogginsApi = helper.ModRegistry.GetApi<ISogginsApi>("Shockah.Soggins");
 
-			foreach (var registerableType in LateRegisterableTypes)
-				AccessTools.DeclaredMethod(registerableType, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
+			/*foreach (var registerableType in LateRegisterableTypes)
+				AccessTools.DeclaredMethod(registerableType, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);*/
 		};
 
 		this.AnyLocalizations = new JsonLocalizationProvider(
@@ -207,13 +198,9 @@ public sealed class ModEntry : SimpleMod
 			]
 		});
 		
-
-		DynamicWidthCardAction.ApplyPatches(Harmony, logger);
-		DontLetCleoBecomeAnNPC.Apply(Harmony);
-		
-		CleoDeck = helper.Content.Decks.RegisterDeck("Cleo", new()
+		RosaDeck = helper.Content.Decks.RegisterDeck("Rosa", new()
 		{
-			Definition = new() { color = new("8A3388"), titleColor = Colors.white },
+			Definition = new() { color = new("5b48ff"), titleColor = Colors.black },
 			DefaultCardArt = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/Default.png")).Sprite,
 			BorderSprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/CardFrame.png")).Sprite,
 			Name = this.AnyLocalizations.Bind(["character", "name"]).Localize
@@ -221,30 +208,24 @@ public sealed class ModEntry : SimpleMod
 
 		foreach (var registerableType in RegisterableTypes)
 			AccessTools.DeclaredMethod(registerableType, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
-
-		KiwiCharacter = helper.Content.Characters.V2.RegisterNonPlayableCharacter("Kiwi", new NonPlayableCharacterConfigurationV2()
-		{
-			CharacterType = "kiwi",
-			Name = AnyLocalizations.Bind(["character", "nameKiwi"]).Localize,
-			
-		});
 		
-		CleoCharacter = helper.Content.Characters.V2.RegisterPlayableCharacter("Cleo", new()
+		
+		RosaCharacter = helper.Content.Characters.V2.RegisterPlayableCharacter("Rosa", new()
 		{
-			Deck = CleoDeck.Deck,
+			Deck = RosaDeck.Deck,
 			Description = this.AnyLocalizations.Bind(["character", "description"]).Localize,
 			BorderSprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/CharacterFrame.png")).Sprite,
 			NeutralAnimation = new()
 			{
-				CharacterType = CleoDeck.UniqueName,
+				CharacterType = RosaDeck.UniqueName,
 				LoopTag = "neutral",
-				Frames = Enumerable.Range(0, 5)
+				Frames = Enumerable.Range(0, 1)
 					.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Neutral/{i}.png")).Sprite)
 					.ToList()
 			},
 			MiniAnimation = new()
 			{
-				CharacterType = CleoDeck.UniqueName,
+				CharacterType = RosaDeck.UniqueName,
 				LoopTag = "mini",
 				Frames = [
 					helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Character/mini.png")).Sprite
@@ -268,30 +249,20 @@ public sealed class ModEntry : SimpleMod
 					new DodgeColorless()
 					]
 			},
-			ExeCardType = typeof(CleoExeCard)
+			ExeCardType = typeof(RosaExeCard)
 		});
 		
-		helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2()
-		{
-			CharacterType = KiwiCharacter.CharacterType,
-			LoopTag = "neutral",
-			Frames = Enumerable.Range(0, 1)
-				.Select(i =>
-					helper.Content.Sprites
-						.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Kiwi/{i}.png")).Sprite)
-				.ToList()
-		});
 		helper.Content.Characters.V2.RegisterCharacterAnimation(new()
 		{
-			CharacterType = CleoDeck.UniqueName,
+			CharacterType = RosaDeck.UniqueName,
 			LoopTag = "gameover",
 			Frames = Enumerable.Range(0, 1)
 				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/GameOver/{i}.png")).Sprite)
 				.ToList()
 		});
-		helper.Content.Characters.V2.RegisterCharacterAnimation(new()
+		/*helper.Content.Characters.V2.RegisterCharacterAnimation(new()
 		{
-			CharacterType = CleoDeck.UniqueName,
+			CharacterType = RosaDeck.UniqueName,
 			LoopTag = "squint",
 			Frames = Enumerable.Range(0, 3)
 				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Squint/{i}.png")).Sprite)
@@ -299,20 +270,12 @@ public sealed class ModEntry : SimpleMod
 		});
 		helper.Content.Characters.V2.RegisterCharacterAnimation(new()
 		{
-			CharacterType = CleoDeck.UniqueName,
-			LoopTag = "explain",
-			Frames = Enumerable.Range(0, 5)
-				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Explain/{i}.png")).Sprite)
-				.ToList()
-		});
-		helper.Content.Characters.V2.RegisterCharacterAnimation(new()
-		{
-			CharacterType = CleoDeck.UniqueName,
+			CharacterType = RosaDeck.UniqueName,
 			LoopTag = "nervous",
 			Frames = Enumerable.Range(0, 5)
 				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Nervous/{i}.png")).Sprite)
 				.ToList()
-		});
+		});*/
 
 		ImproveAIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImproveA.png"));
 		ImproveBIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImproveB.png"));
@@ -335,7 +298,7 @@ public sealed class ModEntry : SimpleMod
 			"TheJazMaster.MoreDifficulties",
 			new SemanticVersion(1, 3, 0),
 			api => api.RegisterAltStarters(
-				deck: CleoDeck.Deck,
+				deck: RosaDeck.Deck,
 				starterDeck: new StarterDeck
 				{
 					cards = [
@@ -345,27 +308,15 @@ public sealed class ModEntry : SimpleMod
 				}
 			)
 		);
-		helper.Events.RegisterBeforeArtifactsHook(nameof(Artifact.OnCombatStart), (State state, Combat combat) =>
-		{
-				foreach (Character crew in state.characters)
-				{
-					if (crew.type == CleoCharacter.CharacterType)
-					{
-						if (combat.otherShip.ai is Shopkeep)
-						{ 
-							state.rewardsQueue.Add(new BRINGITBACK());
-						}
-					}
-				}
-			});
+		
 		_ = new ImprovedAManager();
 		_ = new ImprovedBManager();
 		_ = new ImpairedManager();
 		_ = new ImpairedCostManager();
-		_ = new DialogueExtensions();
+		/*_ = new DialogueExtensions();
 		_ = new CombatDialogue();
 		_ = new EventDialogue();
-		_ = new CardDialogue();
+		_ = new CardDialogue();*/
 	}
 
 	public override object? GetApi(IModManifest requestingMod)

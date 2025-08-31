@@ -6,7 +6,7 @@ using daisyowl.text;
 using Shockah.Kokoro;
 
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal sealed class SeekerBarrageCard : Card, IRegisterable
 {

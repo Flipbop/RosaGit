@@ -3,7 +3,7 @@ using Nickel;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal sealed class NecessarySacrificeCard : Card, IRegisterable
 {

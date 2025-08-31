@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 public interface IDuoArtifactsApi
 {

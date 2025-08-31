@@ -1,7 +1,7 @@
 ﻿using Nickel;
 using System.Linq;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal static class ImpairedExt
 {

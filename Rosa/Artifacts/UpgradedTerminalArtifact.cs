@@ -4,7 +4,7 @@ using Nickel;
 using System.Linq;
 using System.Reflection;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal sealed class UpgradedTerminalArtifact : Artifact, IRegisterable
 {

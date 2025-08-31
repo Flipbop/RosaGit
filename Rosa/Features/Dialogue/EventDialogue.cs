@@ -4,84 +4,8 @@ using System.Collections.Generic;
 using HarmonyLib;
 
 
-namespace Flipbop.Cleo;
+/*namespace Flipbop.Rosa;
 
-
-internal static class DontLetCleoBecomeAnNPC
-{
-	public static void Apply(IHarmony harmony)
-	{
-		harmony.Patch(
-			original: typeof(Events).GetMethod(nameof(Events.ShopFightBackOut))!,
-			postfix: new HarmonyMethod(typeof(DontLetCleoBecomeAnNPC), nameof(ShopFightBackOutCleoEdition))
-		);
-		harmony.Patch(
-			original: typeof(Events).GetMethod(nameof(Events.ShopSkipConfirm))!,
-			postfix: new HarmonyMethod(typeof(DontLetCleoBecomeAnNPC), nameof(ShopSkipConfirmCleoEdition))
-		);
-		harmony.Patch(
-			original: typeof(Shopkeep).GetMethod(nameof(Shopkeep.BuildShipForSelf))!,
-			postfix: new HarmonyMethod(typeof(DontLetCleoBecomeAnNPC), nameof(NoneOfYourBusinessCleoEdition))
-		);
-	}
-
-    private static void ShopSkipConfirmCleoEdition(State s, ref List<Choice> __result)
-    {
-		foreach (Character character in s.characters)  // There's no way to get Character from CleoCharacter or CleoDeck, so had to do it this way.
-		{
-			if (character.type == ModEntry.Instance.CleoCharacter.CharacterType)  // Checks if Cleo is in your crew, so it doesn't do anything if Cleo is not present
-			{
-				for (int x = 0; x < __result.Count; x++)
-				{
-					if (__result[x] is Choice c && c.key == "ShopSkipConfirm_No")
-					{
-						__result[x] = new Choice
-						{
-							label = "Nevermind",
-							key = "Flipbop.Cleo::Shop.3"
-						};
-						return;
-					}
-				}
-			}
-		}
-    }
-
-    private static void ShopFightBackOutCleoEdition(State s, ref List<Choice> __result)
-    {
-		foreach (Character character in s.characters)
-		{
-			if (character.type == ModEntry.Instance.CleoCharacter.CharacterType)
-			{
-				for (int x = 0; x < __result.Count; x++)
-				{
-					if (__result[x] is Choice c && c.key == "ShopFightBackOut_No")
-					{
-						__result[x] = new Choice
-						{
-							label = "mmmmaybe not...",
-							key = "Flipbop.Cleo::Shop.3"
-						};
-						return;
-					}
-				}
-			}
-		}
-    }
-
-    private static void NoneOfYourBusinessCleoEdition(State s, ref Shopkeep __instance)
-    {
-	    var cleoKiwi = ModEntry.Instance.KiwiCharacter.CharacterType;
-
-	    foreach (Character crew in s.characters)
-	    {
-		    if (crew.type == ModEntry.Instance.CleoCharacter.CharacterType)
-		    {
-			    __instance.character = new Character() { type = cleoKiwi };
-		    }
-	    }
-    }
-}
 
 internal sealed class EventDialogue : BaseDialogue
 {
@@ -526,4 +450,4 @@ internal sealed class EventDialogue : BaseDialogue
 			loopTag = "neutral"
 		};
 	}
-}
+}*/

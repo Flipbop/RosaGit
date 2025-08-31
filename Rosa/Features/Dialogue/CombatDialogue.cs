@@ -1,7 +1,7 @@
 ﻿using Nickel;
 using System.Collections.Generic;
 
-namespace Flipbop.Cleo;
+/*namespace Flipbop.Rosa;
 
 internal sealed class CombatDialogue : BaseDialogue
 {
@@ -565,4 +565,4 @@ internal sealed class CombatDialogue : BaseDialogue
 			loopTag = "squint"
 		};
 	}
-}
+}*/

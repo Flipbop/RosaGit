@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Nickel;
 using Shockah.Kokoro;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal static class ImprovedAExt
 {
@@ -19,13 +19,7 @@ internal static class ImprovedAExt
 		{
 			SetIsImprovedA(self, true);
 			ModEntry.Instance.KokoroApi.TemporaryUpgrades.SetTemporaryUpgrade(self, Upgrade.A);
-			if (ModEntry.Instance.ISogginsApi is { } soggins)
-			{
-				if (s.EnumerateAllArtifacts().Any((a) => a is CleoSogginsArtifact))
-				{
-					ModEntry.Instance.helper.Content.Cards.SetCardTraitOverride(s, self, soggins.FrogproofTrait!, true, false);
-				}
-			}
+			
 		}
 	}
 	public static void RemoveImprovedA(this Card self, State s)
@@ -50,13 +44,7 @@ internal sealed class ImprovedAManager
 				if (!card.GetData(state).exhaust)
 				{
 					card.RemoveImprovedA(state);
-					if (ModEntry.Instance.ISogginsApi is { } soggins)
-					{
-						if (state.EnumerateAllArtifacts().Any((a) => a is CleoSogginsArtifact))
-						{
-							ModEntry.Instance.helper.Content.Cards.SetCardTraitOverride(state, card, soggins.FrogproofTrait!, false, false);
-						}
-					}
+					
 				}
 			}
 		});

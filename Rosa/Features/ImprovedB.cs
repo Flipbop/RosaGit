@@ -1,7 +1,7 @@
 ﻿using Nickel;
 using System.Linq;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal static class ImprovedBExt
 {
@@ -17,13 +17,7 @@ internal static class ImprovedBExt
 		{
 			SetIsImprovedB(self, true);
 			ModEntry.Instance.KokoroApi.TemporaryUpgrades.SetTemporaryUpgrade(self, Upgrade.B);
-			if (ModEntry.Instance.ISogginsApi is { } soggins)
-			{
-				if (s.EnumerateAllArtifacts().Any((a) => a is CleoSogginsArtifact))
-				{
-					ModEntry.Instance.helper.Content.Cards.SetCardTraitOverride(s, self, soggins.FrogproofTrait!, true, false);
-				}
-			}
+			
 		}
 	}
 	public static void RemoveImprovedB(this Card self, State s)
@@ -47,13 +41,7 @@ internal sealed class ImprovedBManager
 				if (!card.GetData(state).exhaust)
 				{
 					card.RemoveImprovedB(state);
-					if (ModEntry.Instance.ISogginsApi is { } soggins)
-					{
-						if (state.EnumerateAllArtifacts().Any((a) => a is CleoSogginsArtifact))
-						{
-							ModEntry.Instance.helper.Content.Cards.SetCardTraitOverride(state, card, soggins.FrogproofTrait!, false, false);
-						}
-					}
+					
 				}
 			}
 		});

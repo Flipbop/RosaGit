@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Flipbop.Cleo;
+/*namespace Flipbop.Rosa;
 
 internal static class DialogueExt
 {
@@ -88,4 +88,4 @@ internal sealed class DialogueExtensions
 
 		s.storyVars.SetShieldLostThisTurn(s.storyVars.GetShieldLostThisTurn() + (__state - newShields));
 	}
-}
+}*/

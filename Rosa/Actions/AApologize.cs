@@ -4,9 +4,9 @@ using Nickel;
 using System.Collections.Generic;
 
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
-public sealed class AApologize : DynamicWidthCardAction
+public sealed class AApologize : CardAction
 {
 	public required int dmgRamp;
 	public required bool peirce;

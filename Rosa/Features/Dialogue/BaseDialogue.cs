@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Flipbop.Cleo;
+/*namespace Flipbop.Rosa;
 
 internal abstract class BaseDialogue(Func<string, Stream> localeStreamFunction)
 {
@@ -118,4 +118,4 @@ internal abstract class BaseDialogue(Func<string, Stream> localeStreamFunction)
 			e.Localizations[$"{realKey}:{line.hash}"] = Localizations.Localize(e.Locale, key);
 		}
 	}
-}
+}*/

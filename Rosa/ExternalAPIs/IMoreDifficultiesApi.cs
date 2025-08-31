@@ -1,4 +1,4 @@
-﻿namespace Flipbop.Cleo;
+﻿namespace Flipbop.Rosa;
 
 public interface IMoreDifficultiesApi
 {

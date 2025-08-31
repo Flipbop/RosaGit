@@ -5,7 +5,7 @@ using System.Reflection;
 using daisyowl.text;
 using Shockah.Kokoro;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal sealed class PermaFixCard : Card, IRegisterable
 {

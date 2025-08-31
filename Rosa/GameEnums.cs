@@ -1,6 +1,6 @@
 ﻿using Nanoray.EnumByNameSourceGenerator;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 [EnumByName(typeof(Spr))]
 internal static partial class StableSpr;

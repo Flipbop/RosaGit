@@ -1,12 +1,11 @@
 {
     "character": {
-        "name": "Cleo",
+        "name": "Rosa",
         "description": [
-            "<c=8A3388>CLEO</c>",
-            "Your shopkeeper.",
-            "Capable of <c=keyword>temporarily upgrading and downgrading</c> cards in your hand and benefiting from them."
-        ],
-        "nameKiwi": "Kiwi"
+            "<c=5b48ff>ROSA</c>",
+            "Your comms expert.",
+            "Her cards generate lots of <c=keyword>card draw</c>, as well as apply various <c=keyword>negative status ailments</c> to the enemy."
+        ]
     },
     "action": {
         "UpgradesInHand": {
@@ -113,8 +112,8 @@
         "PowerEcho": {
             "name": "POWER ECHO",
             "description": "The first time you play an upgraded card each turn, create an <c=cardtrait>Impaired</c>, <c=cardtrait>single use</c>, <c=cardtrait>temporary</c> <c=keyword>copy</c> of it in your hand. <c=downside>Cannot duplicate Single Use cards!</c>"
-        },
-        "Duo": {
+        }
+        /*"Duo": {
             "CleoBooks": {
                 "name": "CRYSTALLINE REFINEMENT",
                 "description": "When you play a <c=card>Crystal Shard</c>, the card you draw gains <c=cardtrait>Improved A</c>. Will instead use the B upgrade if A is not an option."
@@ -155,7 +154,7 @@
                 "name": "FROGPROOF COATING",
                 "description": "<c=cardtrait>Improved</c> cards are also <c=cardtrait>Frogproof</c>."
             }
-        }
+        }*/
     },
 
 
@@ -260,16 +259,16 @@
         },
 
         
-        "CleoExe": {
-            "name": "Cleo.EXE",
+        "RosaExe": {
+            "name": "Rosa.EXE",
             "description": {
-                "None": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=8A3388>Cleo</c> cards to your hand.",
-                "A": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=8A3388>Cleo</c> cards to your hand.",
-                "B": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=8A3388>Cleo</c> cards to your hand."
+                "None": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Cleo</c> cards to your hand.",
+                "A": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Cleo</c> cards to your hand.",
+                "B": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Cleo</c> cards to your hand."
             }
-        },
+        }
 
-        "Duo": {
+        /*"Duo": {
             "Hold0": {
                 "name": "RPYD Shares",
                 "description": {
@@ -305,6 +304,6 @@
             "ReturnOnInvestment": {
                 "name": "Returns"
             }
-        }
+        }*/
     }
 }

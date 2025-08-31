@@ -1,11 +1,11 @@
 ﻿using Nickel;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
-public sealed class ApiImplementation : ICleoApi
+public sealed class ApiImplementation : IRosaApi
 {
-	public IDeckEntry CleoDeck
-		=> ModEntry.Instance.CleoDeck;
+	public IDeckEntry RosaDeck
+		=> ModEntry.Instance.RosaDeck;
 
 	public ICardTraitEntry ImprovedACardTrait
 		=> ImprovedAManager.Trait;

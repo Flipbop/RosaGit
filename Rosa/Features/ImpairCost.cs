@@ -5,7 +5,7 @@ using FSPRO;
 using Microsoft.Extensions.Logging;
 using Shockah.Kokoro;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 internal sealed class ImpairedCostManager
 {
     internal static readonly ICardTraitEntry Trait = ModEntry.Instance.ImpairedTrait;
@@ -60,18 +60,7 @@ internal sealed class ImpairedCost : IKokoroApi.IV2.IActionCostsApi.IResource
 			    }
 			    amount--;
 			    Audio.Play(Event.CardHandling);
-			    if (s.EnumerateAllArtifacts().Any((a) => a is CleoDrakeArtifact))
-			    {
-				    c.Queue(new AStatus { targetPlayer = true, status = Status.heat, statusAmount = 1 });
-			    }
-			    if (s.EnumerateAllArtifacts().Any((a) => a is CleoDizzyArtifact))
-			    {
-				    c.Queue(new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 1 });
-				    if (c.hand[index].GetMeta().deck == Deck.dizzy)
-				    {
-					    c.Queue(new AImproveASelf() { id = c.hand[index].uuid });
-				    }
-			    }
+			    
 		    }
 		    index--;
 	    }

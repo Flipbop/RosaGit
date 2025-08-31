@@ -1,7 +1,7 @@
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal interface IRegisterable
 {

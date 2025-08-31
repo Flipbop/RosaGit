@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
 
-namespace Flipbop.Cleo;
+namespace Flipbop.Rosa;
 
 internal sealed class DoItYourselfCard : Card, IRegisterable
 {
