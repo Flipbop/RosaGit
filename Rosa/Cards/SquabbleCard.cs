@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class SquabbleCard : Card, IRegisterable
+internal sealed class SquabbleCard : Card, IRegisterable, IHasCustomCardTraits
 {
 
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
@@ -24,25 +24,35 @@ internal sealed class SquabbleCard : Card, IRegisterable
 		});
 	}
 
+	public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+		=> upgrade switch
+		{
+			_ => new HashSet<ICardTraitEntry>()
+			{
+				ModEntry.Instance.PatientTrait
+			}
+		};
 	public override CardData GetData(State state)
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = upgrade == Upgrade.B ? 0 : 1,
-			exhaust = upgrade == Upgrade.B,
+			cost = upgrade == Upgrade.B ? 3 : 2,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
 			Upgrade.B => [
-				new AAttack { damage = GetDmg(s, 3), moveEnemy = 2},
+				new AStatus() {targetPlayer = false, status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = 2},
+				new ADrawCard() {count = 3}
 			],
 			Upgrade.A => [
-				new AAttack { damage = GetDmg(s, 3), moveEnemy = -2},
+				new AStatus() {targetPlayer = false, status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = 1},
+				new ADrawCard() {count = 4}			
 			],
 			_ => [
-				new AAttack { damage = GetDmg(s, 2), moveEnemy = -1},
+				new AStatus() {targetPlayer = false, status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = 1},
+				new ADrawCard() {count = 3}
 			]
 		};
 }

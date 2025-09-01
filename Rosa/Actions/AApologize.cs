@@ -34,7 +34,7 @@ public sealed class AApologize : CardAction
 	}
 
 	public override Icon? GetIcon(State s)
-		=> new(ModEntry.Instance.ImpairHandIcon.Sprite, null, Colors.textMain);
+		=> new(ModEntry.Instance.FrazzleIcon.Sprite, null, Colors.textMain);
 	
 	public override List<Tooltip> GetTooltips(State s)
       {

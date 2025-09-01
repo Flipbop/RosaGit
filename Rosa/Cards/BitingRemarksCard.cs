@@ -1,11 +1,12 @@
 using Nanoray.PluginManager;
 using Nickel;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class MemoryRecoveryCard : Card, IRegisterable
+internal sealed class BitingRemarksCard : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,8 +19,8 @@ internal sealed class MemoryRecoveryCard : Card, IRegisterable
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/MemoryRecovery.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "MemoryRecovery", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/BitingRemarks.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "BitingRemarks", "name"]).Localize
 		});
 	}
 
@@ -27,16 +28,21 @@ internal sealed class MemoryRecoveryCard : Card, IRegisterable
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = upgrade == Upgrade.A? 0 : 1,
-			description = ModEntry.Instance.Localizations.Localize(["card", "MemoryRecovery", "description", upgrade.ToString()])
+			cost = upgrade == Upgrade.B? 1: 2,
+			infinite = upgrade == Upgrade.B,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
 			Upgrade.B => [
+				new AStatus { targetPlayer = false, status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = 1},
+			],
+			Upgrade.A => [
+				new AStatus { targetPlayer = false, status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = 3},
 			],
 			_ => [
-			]
+				new AStatus { targetPlayer = false, status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = 2},
+			],
 		};
 }

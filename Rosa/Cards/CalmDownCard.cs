@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class CalmDownCard : Card, IRegisterable
+internal sealed class CalmDownCard : Card, IRegisterable, IHasCustomCardTraits
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -22,26 +22,37 @@ internal sealed class CalmDownCard : Card, IRegisterable
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CalmDown", "name"]).Localize
 		});
 	}
-
+	public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+		=> upgrade switch
+		{
+			_ => new HashSet<ICardTraitEntry>()
+			{
+				ModEntry.Instance.PatientTrait
+			}
+		};
+	
 	public override CardData GetData(State state)
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = 1,
+			cost = upgrade switch
+			{
+				Upgrade.A => 3,
+				Upgrade.B => 5,
+				_ => 4
+			},
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
 			Upgrade.B => [
-				new AShuffleHand(),
-			],
-			Upgrade.A => [
-				new AShuffleHand(),
-				new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 2 },
+				new AStatus { targetPlayer = false, status = ModEntry.Instance.KokoroApi.DriveStatus.Underdrive, statusAmount = 2 },
+				new AStatus() {targetPlayer = true, status = Status.shield, statusAmount = 1}
 			],
 			_ => [
-				new AShuffleHand(),
+				new AStatus { targetPlayer = false, status = ModEntry.Instance.KokoroApi.DriveStatus.Underdrive, statusAmount = 1 },
+				new AStatus() {targetPlayer = true, status = Status.shield, statusAmount = 1}
 			]
 		};
 }

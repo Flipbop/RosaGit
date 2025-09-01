@@ -8,12 +8,10 @@ using Shockah.Kokoro;
 
 namespace Flipbop.Rosa;
 
-internal sealed class SeekerBarrageCard : Card, IRegisterable
+internal sealed class ToxicMentalityCard : Card, IRegisterable, IHasCustomCardTraits
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
-		ModEntry.Instance.KokoroApi.CardRendering.RegisterHook(new Hook());
-
 		helper.Content.Cards.RegisterCard(MethodBase.GetCurrentMethod()!.DeclaringType!.Name, new()
 		{
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
@@ -24,40 +22,39 @@ internal sealed class SeekerBarrageCard : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Art = helper.Content.Sprites
-				.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/SeekerBarrage.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "SeekerBarrage", "name"]).Localize
+				.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/ToxicMentality.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ToxicMentality", "name"]).Localize
 		});
 	}
-
+	public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+		=> upgrade switch
+		{
+			_ => new HashSet<ICardTraitEntry>()
+			{
+				ModEntry.Instance.PatientTrait
+			}
+		};
 	public override CardData GetData(State state)
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = 3,
-			exhaust = true,
-			description =
-				ModEntry.Instance.Localizations.Localize(["card", "SeekerBarrage", "description", upgrade.ToString()])
+			cost = upgrade switch
+			{
+				Upgrade.A => 2,
+				Upgrade.B => 4,
+				_=> 3,
+			},
+			exhaust = upgrade != Upgrade.B,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
-			Upgrade.A => [
-			],
-			Upgrade.B => [
-			],
+			
 			_ => [
+				new AStatus() {status = Status.corrode, statusAmount = 1, targetPlayer = false}
 			]
 		};
 	
-	private sealed class Hook : IKokoroApi.IV2.ICardRenderingApi.IHook
-	{
-		public Font? ReplaceTextCardFont(IKokoroApi.IV2.ICardRenderingApi.IHook.IReplaceTextCardFontArgs args)
-		{
-			if (args.Card is not SeekerBarrageCard)
-				return null;
-			return ModEntry.Instance.KokoroApi.Assets.PinchCompactFont;
-		}
-	}
 }
 

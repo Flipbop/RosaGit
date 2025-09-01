@@ -2,10 +2,11 @@ using Nanoray.PluginManager;
 using Nickel;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 
 namespace Flipbop.Rosa;
 
-internal sealed class HurtfulWordsCard : Card, IRegisterable, IHasCustomCardTraits
+internal sealed class GossipCard : Card, IRegisterable, IHasCustomCardTraits
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,8 +19,8 @@ internal sealed class HurtfulWordsCard : Card, IRegisterable, IHasCustomCardTrai
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/HurtfulWords.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "HurtfulWords", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/Gossip.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Gossip", "name"]).Localize
 		});
 	}
 
@@ -36,19 +37,27 @@ internal sealed class HurtfulWordsCard : Card, IRegisterable, IHasCustomCardTrai
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = upgrade == Upgrade.A? 4:5,
+			cost = 1,
+			infinite = true,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
+			Upgrade.A =>
+			[
+				new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 1},
+				new ADrawCard() {count = 2}
+			],
 			Upgrade.B => [
-				new AStatus { targetPlayer = false, status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = 3 },
-				new AStatus { targetPlayer = false, status = ModEntry.Instance.KokoroApi.DriveStatus.Underdrive, statusAmount = 1 },
+				new AStatus { targetPlayer = true, status = Status.shield, statusAmount = 1},
+				new ADrawCard() {count = 1}
 			],
 			_ => [
-				new AStatus { targetPlayer = false, status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = 2 },
-				new AStatus { targetPlayer = false, status = ModEntry.Instance.KokoroApi.DriveStatus.Underdrive, statusAmount = 1 },
+				new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 1},
+				new ADrawCard() {count = 1}
 			]
+			
 		};
+	
 }

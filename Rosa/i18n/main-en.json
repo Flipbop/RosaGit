@@ -13,39 +13,61 @@
             "description": "If this card is in your hand at the end of your turn, <c=keyword>discount</c> it."
         }
     },
+    "status" : {
+        "Frazzle": {
+            "name": "Frazzle",
+            "description": "Every turn, take <c=keyword>{0}</c> damage and <c=downside>decrease this by 1.</c>"
+        }, 
+        "SuperBoost": {
+            "name": "Super Boost",
+            "description": "Add <c=keyword>{0}</c> to all statuses you gain."
+        },
+        "Rebuttal": {
+            "name": "Rebuttal",
+            "description": "Whenever this ship is hit, it gains <c=keyword>{0}</c> <c=status>DRAW NEXT TURN</c>."
+        },
+        "Sympathy": {
+            "name": "Sympathy",
+            "description": "Whenever the opposing ship moves, this ship moves <c=keyword>{0}</c> spaces in the opposite direction. <c=downside>Decreases by 1 each turn.</c>"
+        },
+        "Silence": {
+            "name": "Silence",
+            "description": "All non-attack actions are negated. <c=downside>Decreases by 1 each turn.</c>"
+        }
+    },
 
     "artifact": {
-        "EnhancedTools": {
-            "name": "ENHANCED TOOLS",
-            "description": "The first time you play an <c=cardtrait>improved</c> card each combat, <c=action>improve</c> another card with the same upgrade."
+        "Diploma": {
+            "name": "DIPLOMA",
+            "description": "For the first 3 turns of combat, draw <c=card>+1 card</c>."
         },
-        "ReusableMaterials": {
-            "name": "REUSABLE MATERIALS",
-            "description": "After playing a card with <c=cardtrait>improved</c>, gain 1 <c=status>SHIELD</c>."                                                              
+        "Ego": {
+            "name": "EGO",
+            "description": "At the end of each turn gain 1 <c=status>TEMP SHIELD</c> for each unique negative status the enemy has."                                                              
         },
-        "Kickstart": {
-            "name": "KICKSTART",
-            "description": "<c=action>Improve A</c> the first 2 eligible cards you draw each combat. Will instead use the B upgrade if A is not an option."
+        "NumberTicket": {
+            "name": "NUMBER TICKET",
+            "description": "For every card drawn past your max hand size, gain 1 <c=status>DRAW NEXT TURN</c>."
         },
-        "MagnifiedLasers": {
-            "name": "MAGNIFIED LASERS",
-            "description": "If your rightmost card is an <c=keyword>upgraded</c> card it does +1 damage."
+        "ThinkingCap": {
+            "name": "THINKING CAP",
+            "description": "The first time you get a full hand each turn, gain 1 <c=status>ENERGY</c>."
         },
-        "UpgradedTerminal": {
-            "name": "UPGRADED TERMINAL",
-            "description": "If you have 3 <c=keyword>upgraded</c> cards in hand when you draw a card, <c=keyword>draw</c> an extra card, once per turn."
+        "Philosophy": {
+            "name": "PHILOSOPHY",
+            "description": "Cards that cost 3 or more energy are <c=cardtrait>patient</c>."
         },
-        "Retainer": {
-            "name": "RETAINER",
-            "description": "Cards no longer lose <c=cardtrait>Improved</c> when played."
+        "Peace": {
+            "name": "PEACE",
+            "description": "Gain 1 <c=status>ENERGY</c> every turn if you did not attack the previous turn."
         },
-        "ExpensiveEquipment": {
-            "name": "EXPENSIVE EQUIPMENT",
-            "description": "<c=boldPink>Non-upgraded</c> cards that cost 3 or more energy start each fight with <c=cardtrait>Improved A</c>. All other cards that cost 3 or more energy start each fight with <c=cardtrait>discount</c>. Will instead use the B upgrade if A is not an option."
+        "BrainFood": {
+            "name": "BRAIN FOOD",
+            "description": "At the end of your turn, decrease the energy cost of all cards in your hand by 1 for the rest of combat. <c=downside>When a card is played, increase it's energy cost by 1 for the rest of combat.</c>"
         },
-        "PowerEcho": {
-            "name": "POWER ECHO",
-            "description": "The first time you play an upgraded card each turn, create an <c=cardtrait>Impaired</c>, <c=cardtrait>single use</c>, <c=cardtrait>temporary</c> <c=keyword>copy</c> of it in your hand. <c=downside>Cannot duplicate Single Use cards!</c>"
+        "BroadcastHub": {
+            "name": "BROADCAST HUB",
+            "description": "Gain 1 <c=status>ENERGY</c> every turn. <c=downside>Create a comms bay to the left of your cockpit.</c>"
         }
         /*"Duo": {
             "CleoBooks": {
@@ -101,19 +123,17 @@
         "Squabble": {
             "name": "Squabble"
         },
-        
-        
-        "ResourceSwap": {
-            "name": "Resource Swap"
+        "Diplomacy": {
+            "name": "Diplomacy"
         },
-        "ReroutePower": {
-            "name": "Reroute Power"
+        "Censor": {
+            "name": "Censor"
         },
-        "Rewrite": {
-            "name": "Rewrite"
+        "Mute": {
+            "name": "Mute"
         },
-        "SlipShot": {
-            "name": "Slip Shot"
+        "Ponder": {
+            "name": "Ponder"
         },
         "PepTalk": {
             "name": "Pep Talk"
@@ -121,112 +141,58 @@
         "IdleBanter": {
             "name": "Idle Banter"
         },
-        "DoItYourself": {
-            "name": "Do It Yourself",
+        "SetEmUp": {
+            "name": "Set 'Em Up",
             "description": {
-                "None": "Add a <c=card>Small Repairs</c> to your <c=keyword>draw pile</c>. Gain 2 <c=status>shield</c>.",
-                "A": "Add a <c=card>Small Repairs A</c> to your <c=keyword>draw pile</c>. Gain 2 <c=status>shield</c>.",
-                "B": "Add 2 <c=card>Small Repairs</c> to your <c=keyword>draw pile</c>. Gain 2 <c=status>shield</c>."
+                "None": "1 outgoing <c=status>boost</c>. Add a <c=card>Knock 'Em Down</c> to your <c=keyword>discard pile</c>.",
+                "A": "1 outgoing <c=status>boost</c>. Add a <c=card>Knock 'Em Down A</c> to your <c=keyword>discard pile</c>.",
+                "B": "2 outgoing <c=status>boost</c>. Add a <c=card>Knock 'Em Down B</c> to your <c=keyword>discard pile</c>."
             }
         },
-        "RepairedGlasses": {
-            "name": "Repaired Glasses"
+        "Gossip": {
+            "name": "Gossip"
         },
-        "ScalpedParts": {
-            "name": "Scalped Parts"
+        "BitingRemarks": {
+            "name": "BitingRemarks"
         },
-        "MaximumEffort": {
-            "name": "Maximum Effort"
+        "Rapport": {
+            "name": "Rapport"
         },
-        "NecessarySacrifice": {
-            "name": "Necessary Sacrifice"
+        "SoftenUp": {
+            "name": "Soften Up"
         },
-        "SeekerBarrage": {
-            "name": "Seeker Barrage",
+        "ToxicMentality": {
+            "name": "Toxic Mentality"
+        },
+        "BassBooster": {
+            "name": "Bass Booster"
+        },
+        "Tranquility": {
+            "name": "Tranquility"
+        },
+        "CallSign": {
+            "name": "Call Sign"
+        },
+        "Rebuttal": {
+            "name": "Rebuttal"
+        },
+        "KnockEmDown": {
+            "name": "Knock 'Em Down",
             "description": {
-                "None": "Move right 1 and fire a <c=keyword>Seeker</c> for each <c=cardtrait>Upgraded</c> card in <c=keyword>hand</c>.",
-                "A": "Move right 1 and fire a <c=keyword>Seeker</c> for each <c=cardtrait>Upgraded</c> card in your <c=keyword>Discard pile</c>.",
-                "B": "Move right 1 and fire a <c=keyword>Seeker</c> for each <c=cardtrait>Upgraded</c> card in your <c=keyword>Exhaust pile</c>."
+                "None": "1 outgoing <c=status>underdrive</c>. Add a <c=card>Set 'Em Up</c> to your <c=keyword>discard pile</c>.",
+                "A": "1 outgoing <c=status>underdrive</c>. Add a <c=card>Set 'Em Up A</c> to your <c=keyword>discard pile</c>.",
+                "B": "1 outgoing <c=status>underdrive</c>. Add a <c=card>Set 'Em Up B</c> to your <c=keyword>discard pile</c>."
             }
-        },
-        "PermaFix": {
-            "name": "Perma-Fix",
-            "description": {
-                "None": "<c=keyword>Upgrade</c> the rightmost eligible card in your hand to its <c=boldPink>A upgrade</c>.",
-                "A": "<c=keyword>Upgrade</c> the rightmost eligible card in your hand to its <c=boldPink>A upgrade</c>.",
-                "B": "<c=keyword>Upgrade</c> the 2 rightmost eligible cards in your hand to their <c=boldPink>B upgrades</c>."
-            }
-        },
-        "CleanSlate": {
-            "name": "Clean Slate",
-            "description": {
-                "None": "<c=keyword>Exhaust</c> all <c=boldPink>non-upgraded</c> cards in hand, then <c=cardtrait>Discount</c> your hand.",
-                "A": "<c=keyword>Exhaust</c> all <c=boldPink>non-upgraded</c> cards in hand, then <c=cardtrait>Discount</c> your hand.",
-                "B": "<c=keyword>Exhaust</c> all <c=boldPink>non-upgraded</c> cards in hand, then <c=cardtrait>Discount</c> your hand."
-            }
-        },
-        "ApologizeNextLoop": {
-            "name": "Apologize Next Loop",
-            "description": {                                                                       
-                "None": "Attack for 1 dmg for each <c=cardtrait>Upgraded</c> card in <c=keyword>hand</c>. +1 dmg after each attack.",
-                "A": "Attack for 1 dmg for each <c=cardtrait>Upgraded</c> card in <c=keyword>hand</c>. +2 dmg after each attack",
-                "B": "Pierce attack for 1 dmg for each <c=cardtrait>Upgraded</c> card in <c=keyword>hand</c>. +1 dmg after each attack"
-            }
-        },
-
-        "DefensivePositions": {
-            "name": "Defensive Positions"
-        },
-        "SmallRepairs": {
-            "name": "Small Repairs"
         },
 
         
         "RosaExe": {
             "name": "Rosa.EXE",
             "description": {
-                "None": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Cleo</c> cards to your hand.",
-                "A": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Cleo</c> cards to your hand.",
-                "B": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Cleo</c> cards to your hand."
+                "None": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Rosa</c> cards to your hand.",
+                "A": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Rosa</c> cards to your hand.",
+                "B": "Add 1 of {{Count}} <c=cardtrait>discount, temp</c> <c=5b48ff>Rosa</c> cards to your hand."
             }
         }
-
-        /*"Duo": {
-            "Hold0": {
-                "name": "RPYD Shares",
-                "description": {
-                    "None": "Add a <c=card>Hold</c> to the <c=boldPink>exhaust pile</c>. <c=boldPink>Upgrade</c> to become playable.",
-                    "A":"Add a <c=card>Hold</c> to the <c=boldPink>exhaust pile</c>.",
-                    "B":"Add a <c=card>Hold</c> to the <c=boldPink>exhaust pile</c>."
-                }
-            },
-            "Hold1": {
-                "name": "Hold",
-                "description": {
-                    "None": "Add a <c=card>HOLD</c> to the <c=boldPink>exhaust pile</c>. <c=boldPink>Upgrade</c> to become playable.",
-                    "A":"Add a <c=card>HOLD</c> to the <c=boldPink>exhaust pile</c>.",
-                    "B":"Add a <c=card>HOLD</c> to the <c=boldPink>exhaust pile</c>."
-                }
-            },
-            "Hold2": {
-                "name": "HOLD",
-                "description": {
-                    "None": "Add a <c=card>NOW</c> to the <c=boldPink>exhaust pile</c>. <c=boldPink>Upgrade</c> to become playable.",
-                    "A":"Add a <c=card>NOW</c> to the <c=boldPink>exhaust pile</c>.",
-                    "B":"Add a <c=card>NOW</c> to the <c=boldPink>exhaust pile</c>."
-                }
-            },
-            "Hold3": {
-                "name": "NOW",
-                "description": {
-                    "None": "Add a <c=card>Returns</c> to the <c=boldPink>exhaust pile</c>. <c=boldPink>Upgrade</c> to become playable.",
-                    "A":"Add a <c=card>Returns</c> to the <c=boldPink>exhaust pile</c>.",
-                    "B":"Add a <c=card>Returns</c> to the <c=boldPink>exhaust pile</c>."
-                }
-            },
-            "ReturnOnInvestment": {
-                "name": "Returns"
-            }
-        }*/
     }
 }

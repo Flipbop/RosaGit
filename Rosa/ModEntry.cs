@@ -24,26 +24,11 @@ public sealed class ModEntry : SimpleMod
 
 	internal IDeckEntry RosaDeck { get; }
 	internal IPlayableCharacterEntryV2 RosaCharacter { get; }
-	internal ISpriteEntry ImproveAIcon { get; }
-	internal ISpriteEntry ImproveBIcon { get; }
-	internal ISpriteEntry ImpairedIcon { get; }
-	internal ISpriteEntry ImproveASelfIcon { get; }
-	internal ISpriteEntry ImproveBSelfIcon { get; }
-	internal ISpriteEntry ImpairSelfIcon { get; }
-	internal ISpriteEntry ImproveAHandIcon { get; }
-	internal ISpriteEntry ImproveBHandIcon { get; }
-	internal ISpriteEntry ImpairHandIcon { get; }
-	internal ISpriteEntry ImprovedIcon { get; }
-	internal ISpriteEntry DiscountHandIcon { get; }
-	internal ISpriteEntry UpgradesInHandIcon { get; }
-	internal ISpriteEntry UpgradesInDrawIcon { get; }
-
-	internal ISpriteEntry UpgradesInDiscardIcon { get; }
-	internal ISpriteEntry UpgradesInExhaustIcon { get; }
-	internal ISpriteEntry ImpairCostIcon { get; }
+	internal ISpriteEntry FrazzleIcon { get; }
 
 
 	internal ICardTraitEntry PatientTrait { get; }
+	internal IStatusEntry FrazzleStatus { get; }
 	public IModHelper helper { get; }
 	
 
@@ -51,7 +36,7 @@ public sealed class ModEntry : SimpleMod
 		typeof(TalkingPointsCard),
 		typeof(HurtfulWordsCard),
 		typeof(FeedEgoCard),
-		typeof(MemoryRecoveryCard),
+		typeof(PonderCard),
 		typeof(CalmDownCard),
 		typeof(ResourceSwapCard),
 		typeof(ReroutePowerCard),
@@ -62,15 +47,15 @@ public sealed class ModEntry : SimpleMod
 	internal static IReadOnlyList<Type> UncommonCardTypes { get; } = [
 		typeof(PepTalkCard),
 		typeof(IdleBanterCard),
-		typeof(DoItYourselfCard),
-		typeof(RepairedGlassesCard),
-		typeof(ScalpedPartsCard),
+		typeof(SetEmUpCard),
+		typeof(GossipCard),
+		typeof(BitingRemarksCard),
 		typeof(MaximumEffortCard), 
 		typeof(NecessarySacrificeCard),
 	];
 
 	internal static IReadOnlyList<Type> RareCardTypes { get; } = [
-		typeof(SeekerBarrageCard),
+		typeof(ToxicMentalityCard),
 		typeof(PermaFixCard),
 		typeof(CleanSlateCard),
 		typeof(ApologizeNextLoopCard),
@@ -78,7 +63,7 @@ public sealed class ModEntry : SimpleMod
 	];
 
 	internal static IReadOnlyList<Type> SpecialCardTypes { get; } = [
-		typeof(SmallRepairsCard),
+		typeof(KnockEmDownCard),
 	];
 
 	internal static IEnumerable<Type> AllCardTypes { get; }
@@ -123,8 +108,9 @@ public sealed class ModEntry : SimpleMod
 	public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
 	{
 		ISpriteEntry improvedSpr = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Improved.png")); 
-		ISpriteEntry impairedSpr = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Impaired.png"));
+		FrazzleIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Frazzle.png"));
 		this.helper = helper;
+		
 
 		Instance = this;
 		Harmony = helper.Utilities.Harmony;
@@ -148,17 +134,17 @@ public sealed class ModEntry : SimpleMod
 			new CurrentLocaleOrEnglishLocalizationProvider<IReadOnlyList<string>>(this.AnyLocalizations)
 		);
 		
-		PatientTrait = helper.Content.Cards.RegisterTrait("Improved A", new()
+		PatientTrait = helper.Content.Cards.RegisterTrait("Patient", new()
 		{
-			Name = this.AnyLocalizations.Bind(["cardtrait", "ImprovedA", "name"]).Localize,
+			Name = this.AnyLocalizations.Bind(["cardtrait", "Patient", "name"]).Localize,
 			Icon = (state, card) => improvedSpr.Sprite,
 			Tooltips = (state, card) => [
-				new GlossaryTooltip($"action.{Instance.Package.Manifest.UniqueName}::Improved A")
+				new GlossaryTooltip($"action.{Instance.Package.Manifest.UniqueName}::Patient")
 				{
-					Icon = improvedSpr.Sprite,
+					Icon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Icons/Patient.png")).Sprite,
 					TitleColor = Colors.cardtrait,
-					Title = Localizations.Localize(["cardTrait", "ImprovedA", "name"]),
-					Description = Localizations.Localize(["cardTrait", "ImprovedA", "description"])
+					Title = Localizations.Localize(["cardTrait", "Patient", "name"]),
+					Description = Localizations.Localize(["cardTrait", "Patient", "description"])
 				}
 			]
 		});
@@ -243,22 +229,19 @@ public sealed class ModEntry : SimpleMod
 				.ToList()
 		});*/
 
-		ImproveAIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImproveA.png"));
-		ImproveBIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImproveB.png"));
-		ImpairedIcon = impairedSpr;
-		ImproveASelfIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImproveASelf.png"));
-		ImproveBSelfIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImproveBSelf.png"));
-		ImpairSelfIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImpairSelf.png"));
-		ImproveAHandIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImproveAHand.png"));
-		ImproveBHandIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImproveBHand.png"));
-		ImpairHandIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImpairHand.png"));
-		ImprovedIcon = improvedSpr;
-		DiscountHandIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/DiscountHand.png"));
-		UpgradesInHandIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/UpgradesInHand.png"));
-		UpgradesInDrawIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/UpgradesInDraw.png"));
-		UpgradesInDiscardIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/UpgradesInDiscard.png"));
-		UpgradesInExhaustIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/UpgradesInExhaust.png"));
-		ImpairCostIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/ImpairedCost.png"));
+		FrazzleStatus = ModEntry.Instance.Helper.Content.Statuses.RegisterStatus("Frazzle", new()
+		{
+			Definition = new()
+			{
+				icon = FrazzleIcon.Sprite,
+				color = new("312351"),
+				isGood = false,
+			},
+			Name = AnyLocalizations.Bind([ "status", "Frazzle", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "Frazzle", "description"])
+				.Localize
+		});
+		
 
 		helper.ModRegistry.AwaitApi<IMoreDifficultiesApi>(
 			"TheJazMaster.MoreDifficulties",
@@ -276,7 +259,8 @@ public sealed class ModEntry : SimpleMod
 		);
 		
 		_ = new PatientManager();
-
+		_ = new FrazzleManager();
+		
 		/*_ = new DialogueExtensions();
 		_ = new CombatDialogue();
 		_ = new EventDialogue();

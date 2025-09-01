@@ -13,7 +13,7 @@ public sealed class ApiImplementation : IRosaApi
 	public Tooltip GetPatientTooltip()
 		=> new GlossaryTooltip($"cardtrait.{ModEntry.Instance.Package.Manifest.UniqueName}::Patient")
 		{
-			Icon = ModEntry.Instance.ImprovedIcon.Sprite,
+			Icon = ModEntry.Instance.FrazzleIcon.Sprite,
 			TitleColor = Colors.cardtrait,
 			Title = ModEntry.Instance.Localizations.Localize(["cardTrait", "Patient", "name"]),
 			Description = ModEntry.Instance.Localizations.Localize(["cardTrait", "Patient", "description"])
