@@ -13,7 +13,7 @@ public sealed class ApiImplementation : IRosaApi
 	public Tooltip GetPatientTooltip()
 		=> new GlossaryTooltip($"cardtrait.{ModEntry.Instance.Package.Manifest.UniqueName}::Patient")
 		{
-			Icon = ModEntry.Instance.FrazzleIcon.Sprite,
+			Icon = ModEntry.Instance.PatientIcon.Sprite,
 			TitleColor = Colors.cardtrait,
 			Title = ModEntry.Instance.Localizations.Localize(["cardTrait", "Patient", "name"]),
 			Description = ModEntry.Instance.Localizations.Localize(["cardTrait", "Patient", "description"])
@@ -24,5 +24,8 @@ public sealed class ApiImplementation : IRosaApi
 
 	public void SetIsPatient(Card card, bool value)
 		=> card.SetIsPatient(value);
-	
+
+	public IStatusEntry FrazzleStatus => ModEntry.Instance.FrazzleStatus;
+	public IStatusEntry RebuttalStatus => ModEntry.Instance.RebuttalStatus;
+	public IStatusEntry SuperBoostStatus => ModEntry.Instance.SuperBoostStatus;
 }

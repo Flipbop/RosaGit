@@ -24,11 +24,22 @@ public sealed class ModEntry : SimpleMod
 
 	internal IDeckEntry RosaDeck { get; }
 	internal IPlayableCharacterEntryV2 RosaCharacter { get; }
+	internal ISpriteEntry PatientIcon { get; }
+
 	internal ISpriteEntry FrazzleIcon { get; }
+	internal ISpriteEntry RebuttalIcon { get; }
+	internal ISpriteEntry SuperBoostIcon { get; }
+	internal ISpriteEntry SympathyIcon { get; }
 
 
 	internal ICardTraitEntry PatientTrait { get; }
 	internal IStatusEntry FrazzleStatus { get; }
+	internal IStatusEntry RebuttalStatus { get; }
+	internal IStatusEntry SympathyStatus { get; }
+
+
+	internal IStatusEntry SuperBoostStatus { get; }
+
 	public IModHelper helper { get; }
 	
 
@@ -56,7 +67,7 @@ public sealed class ModEntry : SimpleMod
 
 	internal static IReadOnlyList<Type> RareCardTypes { get; } = [
 		typeof(ToxicMentalityCard),
-		typeof(PermaFixCard),
+		typeof(RebuttalCard),
 		typeof(CleanSlateCard),
 		typeof(ApologizeNextLoopCard),
 		typeof(DefensivePositionsCard),
@@ -107,8 +118,12 @@ public sealed class ModEntry : SimpleMod
 
 	public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
 	{
-		ISpriteEntry improvedSpr = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Improved.png")); 
+		PatientIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Improved.png")); 
 		FrazzleIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Frazzle.png"));
+		RebuttalIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Rebuttal.png"));
+		SuperBoostIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/SuperBoost.png"));
+		SympathyIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Sympathy.png"));
+
 		this.helper = helper;
 		
 
@@ -137,7 +152,7 @@ public sealed class ModEntry : SimpleMod
 		PatientTrait = helper.Content.Cards.RegisterTrait("Patient", new()
 		{
 			Name = this.AnyLocalizations.Bind(["cardtrait", "Patient", "name"]).Localize,
-			Icon = (state, card) => improvedSpr.Sprite,
+			Icon = (state, card) => PatientIcon.Sprite,
 			Tooltips = (state, card) => [
 				new GlossaryTooltip($"action.{Instance.Package.Manifest.UniqueName}::Patient")
 				{
@@ -241,7 +256,42 @@ public sealed class ModEntry : SimpleMod
 			Description = AnyLocalizations.Bind(["status", "Frazzle", "description"])
 				.Localize
 		});
-		
+		RebuttalStatus = ModEntry.Instance.Helper.Content.Statuses.RegisterStatus("Rebuttal", new()
+		{
+			Definition = new()
+			{
+				icon = RebuttalIcon.Sprite,
+				color = new("312351"),
+				isGood = true,
+			},
+			Name = AnyLocalizations.Bind([ "status", "Rebuttal", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "Rebuttal", "description"])
+				.Localize
+		});
+		SuperBoostStatus = ModEntry.Instance.Helper.Content.Statuses.RegisterStatus("SuperBoost", new()
+		{
+			Definition = new()
+			{
+				icon = SuperBoostIcon.Sprite,
+				color = new("312351"),
+				isGood = true,
+			},
+			Name = AnyLocalizations.Bind([ "status", "SuperBoost", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "SuperBoost", "description"])
+				.Localize
+		});
+		SympathyStatus = ModEntry.Instance.Helper.Content.Statuses.RegisterStatus("Sympathy", new()
+		{
+			Definition = new()
+			{
+				icon = SympathyIcon.Sprite,
+				color = new("312351"),
+				isGood = false,
+			},
+			Name = AnyLocalizations.Bind([ "status", "Sympathy", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "Sympathy", "description"])
+				.Localize
+		});
 
 		helper.ModRegistry.AwaitApi<IMoreDifficultiesApi>(
 			"TheJazMaster.MoreDifficulties",
@@ -260,6 +310,8 @@ public sealed class ModEntry : SimpleMod
 		
 		_ = new PatientManager();
 		_ = new FrazzleManager();
+		_ = new RebuttalManager();
+		_ = new SuperBoostManager();
 		
 		/*_ = new DialogueExtensions();
 		_ = new CombatDialogue();

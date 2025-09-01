@@ -10,4 +10,9 @@ public interface IRosaApi
 	Tooltip GetPatientTooltip();
 	bool GetIsPatient(Card card);
 	void SetIsPatient(Card card, bool value);
+	IStatusEntry FrazzleStatus { get; }
+	IStatusEntry RebuttalStatus { get; }
+	IStatusEntry SuperBoostStatus { get; }
+
+
 }
