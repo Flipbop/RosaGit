@@ -10,7 +10,7 @@ internal static class ImpairedExt
 
 	public static void SetIsPatient(this Card self, bool value)
 		=> ModEntry.Instance.Helper.ModData.SetModData(self, "Patient", value);
-	
+
 }
 
 internal sealed class PatientManager
