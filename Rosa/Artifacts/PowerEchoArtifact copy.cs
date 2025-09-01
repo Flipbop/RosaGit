@@ -14,7 +14,7 @@ internal sealed class PowerEchoArtifact : Artifact, IRegisterable
 			ArtifactType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				owner = ModEntry.Instance.CleoDeck.Deck,
+				owner = ModEntry.Instance.RosaDeck.Deck,
 				pools = ModEntry.GetArtifactPools(MethodBase.GetCurrentMethod()!.DeclaringType!)
 			},
 			Sprite = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/Artifacts/PowerEcho.png")).Sprite,
@@ -38,7 +38,6 @@ internal sealed class PowerEchoArtifact : Artifact, IRegisterable
 				{
 					card = newCard, destination = CardDestination.Hand
 				},
-				new AImpair {Amount = 1}
 			]);
 		}
 	}

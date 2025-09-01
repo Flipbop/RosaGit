@@ -15,7 +15,7 @@ internal sealed class KickstartArtifact : Artifact, IRegisterable
 			ArtifactType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				owner = ModEntry.Instance.CleoDeck.Deck,
+				owner = ModEntry.Instance.RosaDeck.Deck,
 				pools = ModEntry.GetArtifactPools(MethodBase.GetCurrentMethod()!.DeclaringType!)
 			},
 			Sprite = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/Artifacts/Kickstart.png")).Sprite,

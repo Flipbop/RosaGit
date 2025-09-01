@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class TurtleShotCard : Card, IRegisterable
+internal sealed class HurtfulWordsCard : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -14,19 +14,19 @@ internal sealed class TurtleShotCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = ModEntry.Instance.TurtleShotSprite.Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "TurtleShot", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/HurtfulWords.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "HurtfulWords", "name"]).Localize
 		});
 	}
 
 	public override CardData GetData(State state)
 		=> new()
 		{
-			artTint = "996699",
+			artTint = "FFFFFF",
 			cost = 2,
 			exhaust = upgrade == Upgrade.B ? true : false,
 		};

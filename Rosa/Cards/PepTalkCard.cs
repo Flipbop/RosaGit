@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class NecessarySacrificeCard : Card, IRegisterable
+internal sealed class PepTalkCard : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,8 +18,8 @@ internal sealed class NecessarySacrificeCard : Card, IRegisterable
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/NecessarySacrifice.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "NecessarySacrifice", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/PepTalk.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "PepTalk", "name"]).Localize
 		});
 	}
 
@@ -27,14 +27,16 @@ internal sealed class NecessarySacrificeCard : Card, IRegisterable
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = upgrade == Upgrade.A ? 1 : 2,
-			retain = upgrade == Upgrade.B,
+			cost = upgrade == Upgrade.A? 0:1,
 			exhaust = true,
+			retain = upgrade == Upgrade.B,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
-		=>
-		[
-			ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ImpairedCost(), 2), new AStatus{targetPlayer = true, status = Status.perfectShield, statusAmount = 1}).AsCardAction,
-		];
+		=> upgrade switch
+		{
+			_ => [
+				new AStatus() {targetPlayer = true, status = Status.boost, statusAmount = 1}
+			]
+		};
 }

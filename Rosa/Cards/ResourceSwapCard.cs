@@ -28,7 +28,7 @@ internal sealed class ResourceSwapCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
@@ -58,18 +58,14 @@ internal sealed class ResourceSwapCard : Card, IRegisterable
 			Upgrade.A => [
 				new AStatus { targetPlayer = true, status = Status.shield, statusAmount = 2 },
 				new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 2 },
-				new AImpairSelf{id = this.uuid},
 			],
 			Upgrade.B => [
 				new AStatus { targetPlayer = true, status = Status.evade, statusAmount = 2 },
-				new AImpairSelf{id = this.uuid},
 			],
 			_ => [
 				new AAttack {disabled = flipped, damage = GetDmg(s, 2) },
-				new AImproveASelf {disabled = flipped, id = this.uuid},
 				new ADummyAction(),
 				new AAttack {disabled = !flipped, damage = GetDmg(s, 2) },
-				new AImproveBSelf {disabled = !flipped, id = this.uuid},
 			]
 		};
 }

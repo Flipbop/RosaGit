@@ -53,20 +53,20 @@ public sealed class ModEntry : SimpleMod
 	public ISpriteEntry TurtleShotSprite { get; }
 
 	internal static IReadOnlyList<Type> CommonCardTypes { get; } = [
-		typeof(QuickBoostCard),
-		typeof(TurtleShotCard),
-		typeof(ChoicesCard),
+		typeof(TalkingPointsCard),
+		typeof(HurtfulWordsCard),
+		typeof(FeedEgoCard),
 		typeof(MemoryRecoveryCard),
-		typeof(ShuffleUpgradeCard),
+		typeof(CalmDownCard),
 		typeof(ResourceSwapCard),
 		typeof(ReroutePowerCard),
 		typeof(RewriteCard),
-		typeof(SlipShotCard),
+		typeof(SquabbleCard),
 	];
 
 	internal static IReadOnlyList<Type> UncommonCardTypes { get; } = [
-		typeof(PowerSurgeCard),
-		typeof(ImprovedCannonCard),
+		typeof(PepTalkCard),
+		typeof(IdleBanterCard),
 		typeof(DoItYourselfCard),
 		typeof(RepairedGlassesCard),
 		typeof(ScalpedPartsCard),
@@ -234,17 +234,17 @@ public sealed class ModEntry : SimpleMod
 			Starters = new()
 			{
 				cards = [
-					new QuickBoostCard(),
-					new TurtleShotCard()
+					new TalkingPointsCard(),
+					new HurtfulWordsCard()
 				]
 			},
 			SoloStarters = new StarterDeck()
 			{
 				cards = [
-					new QuickBoostCard(),
-					new TurtleShotCard(),
+					new TalkingPointsCard(),
+					new HurtfulWordsCard(),
 					new ReroutePowerCard(),
-					new ShuffleUpgradeCard(),
+					new CalmDownCard(),
 					new CannonColorless(),
 					new DodgeColorless()
 					]
@@ -302,8 +302,8 @@ public sealed class ModEntry : SimpleMod
 				starterDeck: new StarterDeck
 				{
 					cards = [
-						new ShuffleUpgradeCard(),
-						new SlipShotCard()
+						new CalmDownCard(),
+						new SquabbleCard()
 					]
 				}
 			)

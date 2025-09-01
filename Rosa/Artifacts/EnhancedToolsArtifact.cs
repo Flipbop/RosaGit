@@ -14,7 +14,7 @@ internal sealed class EnhancedToolsArtifact : Artifact, IRegisterable
 			ArtifactType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				owner = ModEntry.Instance.CleoDeck.Deck,
+				owner = ModEntry.Instance.RosaDeck.Deck,
 				pools = ModEntry.GetArtifactPools(MethodBase.GetCurrentMethod()!.DeclaringType!)
 			},
 			Sprite = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/Artifacts/EnhancedTools.png")).Sprite,
@@ -30,16 +30,6 @@ internal sealed class EnhancedToolsArtifact : Artifact, IRegisterable
 		if (card.GetIsImprovedA() && firstCard)
 		{
 			firstCard = false;
-			combat.Queue([
-				new AImproveA { Amount = 1}
-			]);
-		}
-		if (card.GetIsImprovedB() && firstCard)
-		{
-			firstCard = false;
-			combat.Queue([
-				new AImproveB { Amount = 1}
-			]);
 		}
 	}
 	

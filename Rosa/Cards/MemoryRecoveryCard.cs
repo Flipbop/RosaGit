@@ -14,7 +14,7 @@ internal sealed class MemoryRecoveryCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
@@ -26,7 +26,7 @@ internal sealed class MemoryRecoveryCard : Card, IRegisterable
 	public override CardData GetData(State state)
 		=> new()
 		{
-			artTint = "996699",
+			artTint = "FFFFFF",
 			cost = upgrade == Upgrade.A? 0 : 1,
 			description = ModEntry.Instance.Localizations.Localize(["card", "MemoryRecovery", "description", upgrade.ToString()])
 		};
@@ -35,10 +35,8 @@ internal sealed class MemoryRecoveryCard : Card, IRegisterable
 		=> upgrade switch
 		{
 			Upgrade.B => [
-				new ADrawUpgrade {Amount = 3},
 			],
 			_ => [
-				new ADrawUpgrade {Amount = 1},
 			]
 		};
 }

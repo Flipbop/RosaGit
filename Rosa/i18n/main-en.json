@@ -146,40 +146,29 @@
                 "name": "BOBA+",
                 "description": "For every 3 <c=boldPink>upgraded</c> cards you draw, gain 1 <c=status>EVADE</c>."
             },
-            "CleoJohnson": {
-                "name": "GREAT OPPORTUNITY",
-                "description": "Add an <c=card>RPYD Shares</c> to your deck."
-            },
-            "CleoSoggins": {
-                "name": "FROGPROOF COATING",
-                "description": "<c=cardtrait>Improved</c> cards are also <c=cardtrait>Frogproof</c>."
-            }
         }*/
     },
 
 
 
     "card": {
-        "QuickBoost": {
-            "name": "Quick Boost"
+        "TalkingPoints": {
+            "name": "Talking Points"
         },
-        "TurtleShot": {
-            "name": "Turtle Shot"
+        "HurtfulWords": {
+            "name": "HurtfulWords"
         },
-        "Choices": {
-            "name": "Choices"
+        "FeedEgo": {
+            "name": "Feed Ego"
         },
-        "MemoryRecovery": {
-            "name": "Memory Recovery",
-            "description": {
-                "None": "Draw an <c=boldPink>Upgraded</c> card from your <c=keyword>Draw pile</c>.",
-                "A": "Draw an <c=boldPink>Upgraded</c> card from your <c=keyword>Draw pile</c>.",
-                "B": "Draw three <c=boldPink>Upgraded</c> cards from your <c=keyword>Draw pile</c>."
-            }
+        "CalmDown": {
+            "name": "Calm Down"
         },
-        "ShuffleUpgrade": {
-            "name": "Shuffle Upgrade"
+        "Squabble": {
+            "name": "Squabble"
         },
+        
+        
         "ResourceSwap": {
             "name": "Resource Swap"
         },
@@ -192,11 +181,11 @@
         "SlipShot": {
             "name": "Slip Shot"
         },
-        "PowerSurge": {
-            "name": "Power Surge"
+        "PepTalk": {
+            "name": "Pep Talk"
         },
-        "ImprovedCannon": {
-            "name": "Improved Cannon"
+        "IdleBanter": {
+            "name": "Idle Banter"
         },
         "DoItYourself": {
             "name": "Do It Yourself",

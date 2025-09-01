@@ -15,7 +15,7 @@ internal sealed class ScalpedPartsCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
@@ -27,7 +27,7 @@ internal sealed class ScalpedPartsCard : Card, IRegisterable
 	public override CardData GetData(State state)
 		=> new()
 		{
-			artTint = "996699",
+			artTint = "FFFFFF",
 			cost = 2,
 		};
 
@@ -36,19 +36,13 @@ internal sealed class ScalpedPartsCard : Card, IRegisterable
 		{
 			Upgrade.B => [
 				new ADrawCard { count = 3},
-				new ImprovedCannonCard.AUpgradeHint{hand = true},
 				new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 2*c.hand.Count(card => card.upgrade != Upgrade.None), xHint = 2},
-				new AImpairHand()
 			],
 			Upgrade.A => [
-				new ImprovedCannonCard.AUpgradeHint{hand = true},
 				new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 3*c.hand.Count(card => card.upgrade != Upgrade.None), xHint = 3},
-				new AImpairHand()
 			],
 			_ => [
-				new ImprovedCannonCard.AUpgradeHint{hand = true},
 				new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 2*c.hand.Count(card => card.upgrade != Upgrade.None), xHint = 2},
-				new AImpairHand()
 			],
 		};
 }

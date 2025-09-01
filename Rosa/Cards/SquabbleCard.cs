@@ -5,8 +5,9 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class PowerSurgeCard : Card, IRegisterable
+internal sealed class SquabbleCard : Card, IRegisterable
 {
+
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
 		helper.Content.Cards.RegisterCard(MethodBase.GetCurrentMethod()!.DeclaringType!.Name, new()
@@ -14,41 +15,34 @@ internal sealed class PowerSurgeCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/PowerSurge.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "PowerSurge", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/Squabble.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Squabble", "name"]).Localize
 		});
 	}
 
 	public override CardData GetData(State state)
 		=> new()
 		{
-			artTint = "996699",
-			cost = 3,
-			exhaust = true
+			artTint = "FFFFFF",
+			cost = upgrade == Upgrade.B ? 0 : 1,
+			exhaust = upgrade == Upgrade.B,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
-			Upgrade.A => [
-				new ADrawCard {count = 2},
-				new AImproveAHand(),
-				new ADiscard {count = 3}
-			],
 			Upgrade.B => [
-				new ADrawCard {count = 1},
-				new AImproveBHand(),
-				new ADiscountHand { Amount = -1},
-				new ADiscard(),
+				new AAttack { damage = GetDmg(s, 3), moveEnemy = 2},
+			],
+			Upgrade.A => [
+				new AAttack { damage = GetDmg(s, 3), moveEnemy = -2},
 			],
 			_ => [
-				new ADrawCard {count = 2},
-				new AImproveAHand(),
-				new ADiscard(),
+				new AAttack { damage = GetDmg(s, 2), moveEnemy = -1},
 			]
 		};
 }

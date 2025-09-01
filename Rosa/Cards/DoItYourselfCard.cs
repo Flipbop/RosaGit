@@ -15,7 +15,7 @@ internal sealed class DoItYourselfCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
@@ -27,7 +27,7 @@ internal sealed class DoItYourselfCard : Card, IRegisterable
 	public override CardData GetData(State state)
 		=> new()
 		{
-			artTint = "996699",
+			artTint = "FFFFFF",
 			cost = 2,
 			exhaust = upgrade != Upgrade.B,
 			singleUse = upgrade == Upgrade.B,

@@ -14,7 +14,7 @@ internal sealed class SmallRepairsCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B],
 				dontOffer = true,
@@ -27,7 +27,7 @@ internal sealed class SmallRepairsCard : Card, IRegisterable
 	public override CardData GetData(State state)
 		=> new()
 		{
-			artTint = "996699",
+			artTint = "FFFFFF",
 			cost = 1,
 			temporary = true,
 			exhaust = upgrade != Upgrade.B,

@@ -15,7 +15,7 @@ internal sealed class RepairedGlassesCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
@@ -29,7 +29,7 @@ internal sealed class RepairedGlassesCard : Card, IRegisterable
 	public override CardData GetData(State state)
 		=> new()
 		{
-			artTint = "996699",
+			artTint = "FFFFFF",
 			cost = 2,
 			exhaust = true,
 		};
@@ -39,17 +39,14 @@ internal sealed class RepairedGlassesCard : Card, IRegisterable
 		{
 			Upgrade.A =>
 			[
-				new ImprovedCannonCard.AUpgradeHint{hand = true},
 				new AStatus { targetPlayer = true, status = Status.energyNextTurn, statusAmount = c.hand.Count(card => card.upgrade != Upgrade.None), xHint = 1},
 				new AStatus { targetPlayer = true, status = Status.drawNextTurn, statusAmount = 2}
 			],
 			Upgrade.B => [
 				new ADiscard {count = 2},
-				new ImprovedCannonCard.AUpgradeDiscardHint{hand = true},
 				new AStatus { targetPlayer = true, status = Status.energyNextTurn, statusAmount = c.discard.Count(card => card.upgrade != Upgrade.None), xHint = 1},
 			],
 			_ => [
-				new ImprovedCannonCard.AUpgradeHint{hand = true},
 				new AStatus { targetPlayer = true, status = Status.energyNextTurn, statusAmount = c.hand.Count(card => card.upgrade != Upgrade.None), xHint = 1},
 			]
 			

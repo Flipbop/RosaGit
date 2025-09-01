@@ -15,7 +15,7 @@ internal sealed class ExpensiveEquipmentArtifact : Artifact, IRegisterable
 			ArtifactType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				owner = ModEntry.Instance.CleoDeck.Deck,
+				owner = ModEntry.Instance.RosaDeck.Deck,
 				pools = ModEntry.GetArtifactPools(MethodBase.GetCurrentMethod()!.DeclaringType!)
 			},
 			Sprite = helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/Artifacts/ExpensiveEquipment.png")).Sprite,
@@ -38,15 +38,7 @@ internal sealed class ExpensiveEquipmentArtifact : Artifact, IRegisterable
 				{
 					if (state.EnumerateAllArtifacts().Any((a) => a is DailyUpgradesOnlyB))
 					{
-						combat.Queue([
-							new AImproveBSelf {id = card.uuid},
-						]);
-					}
-					else
-					{
-						combat.Queue([
-							new AImproveASelf {id = card.uuid},
-						]);
+						
 					}
 				}
 				else if (card.upgrade != Upgrade.None)

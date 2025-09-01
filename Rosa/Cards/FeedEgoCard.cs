@@ -5,8 +5,9 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class ShuffleUpgradeCard : Card, IRegisterable
+internal sealed class FeedEgoCard : Card, IRegisterable
 {
+	private static Spr _bSprite;
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
 		helper.Content.Cards.RegisterCard(MethodBase.GetCurrentMethod()!.DeclaringType!.Name, new()
@@ -14,38 +15,30 @@ internal sealed class ShuffleUpgradeCard : Card, IRegisterable
 			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new()
 			{
-				deck = ModEntry.Instance.CleoDeck.Deck,
+				deck = ModEntry.Instance.RosaDeck.Deck,
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/ShuffleUpgrade.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ShuffleUpgrade", "name"]).Localize
+			Art =helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/FeedEgo.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "FeedEgo", "name"]).Localize
 		});
 	}
 
 	public override CardData GetData(State state)
 		=> new()
 		{
-			artTint = "996699",
-			cost = 1,
+			artTint = "FFFFFF",
+			cost = upgrade == Upgrade.A? 0 : 1,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
 			Upgrade.B => [
-				new AImproveB { Amount = 1 },
-				new AShuffleHand(),
-				new AImproveB { Amount = 1 },
-			],
-			Upgrade.A => [
-				new AShuffleHand(),
-				new AImproveA { Amount = 2 },
-				new AStatus { targetPlayer = true, status = Status.tempShield, statusAmount = 2 },
+				new AStatus() {targetPlayer = false, status = Status.boost, statusAmount = 2}
 			],
 			_ => [
-				new AShuffleHand(),
-				new AImproveA { Amount = 2 },
+				new AStatus() {targetPlayer = false, status = Status.boost, statusAmount = 1}
 			]
 		};
 }
