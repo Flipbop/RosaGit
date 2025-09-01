@@ -18,7 +18,7 @@ internal sealed class RosaExeCard : Card, IRegisterable
 				rarity = Rarity.common,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = ModEntry.Instance.CleanSlateSprite.Sprite,
+			Art = StableSpr.cards_colorless,
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "RosaExe", "name"]).Localize
 		});
 	}

@@ -36,14 +36,11 @@ internal sealed class DefensivePositionsCard : Card, IRegisterable
 		{
 			Upgrade.A => [
 				new AStatus {targetPlayer = true, status = Status.tempShield, statusAmount = 4},
-				ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ImpairedCost(), 2), new AStatus{targetPlayer = true, status = Status.tempPayback, statusAmount = 1}).AsCardAction,
 			],
 			Upgrade.B => [
-				ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ImpairedCost(), 3), new AStatus{targetPlayer = true, status = Status.payback, statusAmount = 1}).AsCardAction,
 			],
 			_ => [
 				new AStatus {targetPlayer = true, status = Status.tempShield, statusAmount = 2},
-				ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(new ImpairedCost(), 2), new AStatus{targetPlayer = true, status = Status.tempPayback, statusAmount = 1}).AsCardAction,
 			]
 		};
 }

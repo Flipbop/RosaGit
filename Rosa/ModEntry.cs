@@ -43,14 +43,9 @@ public sealed class ModEntry : SimpleMod
 	internal ISpriteEntry ImpairCostIcon { get; }
 
 
-	internal ICardTraitEntry ImprovedATrait { get; }
-	internal ICardTraitEntry ImprovedBTrait { get; }
-	internal ICardTraitEntry ImpairedTrait { get; }
+	internal ICardTraitEntry PatientTrait { get; }
 	public IModHelper helper { get; }
 	
-	public ISpriteEntry CleanSlateSprite { get; }
-	
-	public ISpriteEntry TurtleShotSprite { get; }
 
 	internal static IReadOnlyList<Type> CommonCardTypes { get; } = [
 		typeof(TalkingPointsCard),
@@ -129,8 +124,6 @@ public sealed class ModEntry : SimpleMod
 	{
 		ISpriteEntry improvedSpr = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Improved.png")); 
 		ISpriteEntry impairedSpr = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Impaired.png"));
-		CleanSlateSprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/CleanSlate.png"));
-		TurtleShotSprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/TurtleShot.png"));
 		this.helper = helper;
 
 		Instance = this;
@@ -155,7 +148,7 @@ public sealed class ModEntry : SimpleMod
 			new CurrentLocaleOrEnglishLocalizationProvider<IReadOnlyList<string>>(this.AnyLocalizations)
 		);
 		
-		ImprovedATrait = helper.Content.Cards.RegisterTrait("Improved A", new()
+		PatientTrait = helper.Content.Cards.RegisterTrait("Improved A", new()
 		{
 			Name = this.AnyLocalizations.Bind(["cardtrait", "ImprovedA", "name"]).Localize,
 			Icon = (state, card) => improvedSpr.Sprite,
@@ -169,34 +162,7 @@ public sealed class ModEntry : SimpleMod
 				}
 			]
 		});
-		ImprovedBTrait = helper.Content.Cards.RegisterTrait("Improved B", new()
-		{
-			Name = this.AnyLocalizations.Bind(["cardtrait", "ImprovedB", "name"]).Localize,
-			Icon = (state, card) => improvedSpr.Sprite,
-			Tooltips = (state, card) => [
-				new GlossaryTooltip($"action.{Instance.Package.Manifest.UniqueName}::Improved B")
-				{
-					Icon = improvedSpr.Sprite,
-					TitleColor = Colors.cardtrait,
-					Title = Localizations.Localize(["cardTrait", "ImprovedB", "name"]),
-					Description = Localizations.Localize(["cardTrait", "ImprovedB", "description"])
-				}
-			]
-		});
-		ImpairedTrait = helper.Content.Cards.RegisterTrait("ImpairedTrait", new()
-		{
-			Name = this.AnyLocalizations.Bind(["cardtrait", "Impaired", "name"]).Localize,
-			Icon = (state, card) => impairedSpr.Sprite,
-			Tooltips = (state, card) => [
-				new GlossaryTooltip($"action.{Instance.Package.Manifest.UniqueName}::Impaired")
-				{
-					Icon = impairedSpr.Sprite,
-					TitleColor = Colors.cardtrait,
-					Title = Localizations.Localize(["cardTrait", "Impaired", "name"]),
-					Description = Localizations.Localize(["cardTrait", "Impaired", "description"])
-				}
-			]
-		});
+		
 		
 		RosaDeck = helper.Content.Decks.RegisterDeck("Rosa", new()
 		{
@@ -309,10 +275,8 @@ public sealed class ModEntry : SimpleMod
 			)
 		);
 		
-		_ = new ImprovedAManager();
-		_ = new ImprovedBManager();
-		_ = new ImpairedManager();
-		_ = new ImpairedCostManager();
+		_ = new PatientManager();
+
 		/*_ = new DialogueExtensions();
 		_ = new CombatDialogue();
 		_ = new EventDialogue();

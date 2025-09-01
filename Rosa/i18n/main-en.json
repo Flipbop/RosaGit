@@ -7,76 +7,10 @@
             "Her cards generate lots of <c=keyword>card draw</c>, as well as apply various <c=keyword>negative status ailments</c> to the enemy."
         ]
     },
-    "action": {
-        "UpgradesInHand": {
-            "description": "<c=action>X</c> = The number of upgraded cards in your hand."
-        },
-        "UpgradesInDiscard": {
-            "description": "<c=action>X</c> = The number of upgraded cards in your Discard pile."
-        },
-        "UpgradesInExhaust": {
-            "description": "<c=action>X</c> = The number of upgraded cards in your Exhaust pile."
-        },
-        "UpgradesInDraw": {
-            "description": "<c=action>X</c> = The number of upgraded cards in your Draw pile."
-        },
-        "ImproveA": {
-            "name": "   Improve A",
-            "description": "<c=action>Upgrade</c> the rightmost eligible card in hand to its A upgrade. The upgrade lasts until the card is played (unless it <c=boldPurple>exhausts</c>), or until combat ends."
-        },
-        "ImproveB": {
-            "name": "   Improve B",
-            "description": "<c=action>Upgrade</c> the rightmost eligible card in hand to its B upgrade. The upgrade lasts until the card is played (unless it <c=boldPurple>exhausts</c>), or until combat ends."
-        },
-        "Impair": {
-            "name": "Impair",
-            "description": "<c=action>Downgrade</c> the rightmost eligible card in hand to its non-upgraded version. The downgrade lasts until the card is played, or until combat ends."
-        },
-        "ImproveAHand": {
-            "name": "       Improve Hand A",
-            "description": "<c=action>Upgrade</c> every eligible card in hand to its A upgrade. The upgrade lasts until the card is played, or until combat ends."
-        },
-        "ImproveBHand": {
-            "name": "       Improve Hand B",
-            "description": "<c=action>Upgrade</c> every eligible card in hand to its B upgrade. The upgrade lasts until the card is played, or until combat ends."
-        },
-        "ImpairHand": {
-            "name": "    Impair Hand",
-            "description": "<c=action>Downgrade</c> every eligible card in hand to its non-upgraded version. The downgrade lasts until the card is played, or until combat ends."
-        },
-        "DiscountHand": {
-            "name": "    Discount Hand",
-            "description": "<c=cardtrait>Discount</c> every card in your hand."
-        },
-        "SelfImproveA": {
-            "name": "      Self Improve A",
-            "description": "<c=action>Upgrade</c> this card to its A upgrade. The upgrade lasts until this card is played, or until combat ends."
-        },
-        "SelfImproveB": {
-            "name": "      Self Improve B",
-            "description": "<c=action>Upgrade</c> this card to its B upgrade. The upgrade lasts until this card is played, or until combat ends."
-        },
-        "SelfImpair": {
-            "name": "   Self Impair",
-            "description": "<c=action>Downgrade</c> this card to its non-upgraded version. The downgrade lasts until this card is played, or until combat ends."
-        },
-        "ImpairCost": {
-            "name": "Impair",
-            "description": "<c=action>Downgrade</c> the rightmost eligible card in hand to its non-upgraded version to pay for the corresponding action. The downgrade lasts until the card is played, or until combat ends."
-        }
-    },
     "cardTrait": {
-        "ImprovedA": {
-            "name": "Improved A",
-            "description": "The next time this card is played it acts as an <c=boldPink>upgraded</c> version of itself. Lost on play (if it does not <c=boldPurple>exhaust</c>) and the end of the fight."
-        },
-        "ImprovedB": {
-            "name": "Improved B",
-            "description": "The next time this card is played it acts as an <c=boldPink>upgraded</c> version of itself. Lost on play (if it does not <c=boldPurple>exhaust</c>) and the end of the fight."
-        },
-        "Impaired": {
-            "name": "Impaired",
-            "description": "The next time this card is played it acts as a <c=boldPink>non-upgraded</c> version of itself. Lost on play and the end of the fight."
+        "Patient": {
+            "name": "Patient",
+            "description": "If this card is in your hand at the end of your turn, <c=keyword>discount</c> it."
         }
     },
 

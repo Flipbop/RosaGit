@@ -19,7 +19,7 @@ internal sealed class SmallRepairsCard : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B],
 				dontOffer = true,
 			},
-			Art = ModEntry.Instance.TurtleShotSprite.Sprite,
+			Art = StableSpr.cards_colorless,
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "SmallRepairs", "name"]).Localize
 		});
 	}

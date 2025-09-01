@@ -25,11 +25,6 @@ internal sealed class ReusableMaterialsArtifact : Artifact, IRegisterable
 	public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
 	{
 		base.OnPlayerPlayCard(energyCost, deck, card, state, combat, handPosition, handCount);
-		if (card.GetIsImprovedA() || card.GetIsImprovedB())
-		{
-			combat.Queue([
-				new AStatus { targetPlayer = true, status = Status.shield, statusAmount = 1 }
-			]);
-		}
+		
 	}
 }

@@ -23,7 +23,7 @@ internal sealed class CleanSlateCard : Card, IRegisterable
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = ModEntry.Instance.CleanSlateSprite.Sprite,
+			Art = StableSpr.cards_colorless,
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CleanSlate", "name"]).Localize
 		});
 	}
