@@ -38,15 +38,15 @@ internal sealed class PatientManager
 				}
 			}
 		});
-		ModEntry.Instance.helper.Events.RegisterBeforeArtifactsHook(nameof(Artifact.OnDrawCard),
-			(State state, Combat combat) =>
+		ModEntry.Instance.helper.Events.RegisterAfterArtifactsHook(nameof(Artifact.OnDrawCard),
+			(State state, Combat combat, int count) =>
 			{
-				ModEntry.Instance.Helper.ModData.SetModData(combat.hand[^1], "PatientTick", false);
+				foreach (Card card in combat.hand) ModEntry.Instance.Helper.ModData.SetModData(card, "PatientTick", false);
 			});
-		ModEntry.Instance.helper.Events.RegisterBeforeArtifactsHook(nameof(Artifact.OnCombatEnd),
+		ModEntry.Instance.helper.Events.RegisterAfterArtifactsHook(nameof(Artifact.OnCombatEnd),
 			(State state) =>
 			{
-				ModEntry.Instance.Helper.ModData.SetModData(state.deck[^1], "PatientTick", false);
+				foreach (Card card in state.deck) ModEntry.Instance.Helper.ModData.SetModData(card, "PatientTick", false);
 			});
 	}
 }
