@@ -43,5 +43,10 @@ internal sealed class PatientManager
 			{
 				ModEntry.Instance.Helper.ModData.SetModData(combat.hand[^1], "PatientTick", false);
 			});
+		ModEntry.Instance.helper.Events.RegisterBeforeArtifactsHook(nameof(Artifact.OnCombatEnd),
+			(State state) =>
+			{
+				ModEntry.Instance.Helper.ModData.SetModData(state.deck[^1], "PatientTick", false);
+			});
 	}
 }
