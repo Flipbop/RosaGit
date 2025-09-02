@@ -25,19 +25,20 @@ internal sealed class PatientManager
 			{
 				cardCount++;
 			});
-
+		ModEntry.Instance.Helper.Events.RegisterBeforeArtifactsHook(nameof(Artifact.OnPlayerPlayCard),
+			(State state, Combat combat) =>
+			{
+				cardCount--;
+			});
 		ModEntry.Instance.Helper.Events.RegisterAfterArtifactsHook(nameof(Artifact.OnTurnEnd), (State state, Combat combat) =>
 		{
-			for (int i = combat.discard.Count; i > 0; i--)
+			for (int i = combat.discard.Count-1; i >= 0; i--)
 			{
-				if (i > 0)
-				{
-					Card card = combat.discard[i];
-					if (card.GetIsPatient() && cardCount > 0)
-					{
-						card.discount -= 1;
-						cardCount--;
-					}
+				Card card = combat.discard[i]; 
+				if (card.GetIsPatient() && cardCount > 0) 
+				{ 
+					card.discount -= 1; 
+					cardCount--;
 				}
 			}
 		});

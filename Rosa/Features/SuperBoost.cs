@@ -20,9 +20,8 @@ internal sealed class SuperBoostManager : IKokoroApi.IV2.IStatusRenderingApi.IHo
 	private sealed class Hook : IKokoroApi.IV2.IStatusLogicApi.IHook
 	{
 		public int ModifyStatusChange(IKokoroApi.IV2.IStatusLogicApi.IHook.IModifyStatusChangeArgs args)
-		{
-			var isPlayerShip = args.Ship.isPlayerShip;
-			if (args.Status != Status.shield || args.Status != Status.tempShield)
+		{ 
+			if (args.Status != Status.shield && args.Status != Status.tempShield)
 			{
 				if (args.OldAmount >= args.NewAmount || args.NewAmount <= 0) return args.NewAmount;
 				var superBoost = args.Ship.Get(ModEntry.Instance.SuperBoostStatus.Status);
