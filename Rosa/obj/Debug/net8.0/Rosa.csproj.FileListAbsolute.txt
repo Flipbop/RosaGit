@@ -6,3 +6,4 @@
 /Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/bin/Debug/net8.0/Rosa.deps.json
 /Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/bin/Debug/net8.0/Rosa.dll
 /Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/obj/Debug/net8.0/Rosa.dll
+/Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/obj/Debug/net8.0/Rosa.sourcelink.json

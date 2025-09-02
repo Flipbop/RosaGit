@@ -23,9 +23,10 @@ internal sealed class PatientManager
 		{
 			foreach (Card card in combat.discard)
 			{
-				if (card.GetIsPatient()) 
+				if (card.GetIsPatient() && !ModEntry.Instance.Helper.ModData.GetModDataOrDefault<bool>(card, "PatientTick")) 
 				{ 
 					card.discount -= 1; 
+					ModEntry.Instance.Helper.ModData.SetModData(card, "PatientTick", true);
 				}
 			}
 			foreach (Card card in combat.hand)
@@ -33,8 +34,14 @@ internal sealed class PatientManager
 				if (card.GetIsPatient()) 
 				{ 
 					card.discount -= 1; 
+					ModEntry.Instance.Helper.ModData.SetModData(card, "PatientTick", true);
 				}
 			}
 		});
+		ModEntry.Instance.helper.Events.RegisterBeforeArtifactsHook(nameof(Artifact.OnDrawCard),
+			(State state, Combat combat) =>
+			{
+				ModEntry.Instance.Helper.ModData.SetModData(combat.hand[^1], "PatientTick", false);
+			});
 	}
 }
