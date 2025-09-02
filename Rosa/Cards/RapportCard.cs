@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class NecessarySacrificeCard : Card, IRegisterable
+internal sealed class RapportCard : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,8 +18,8 @@ internal sealed class NecessarySacrificeCard : Card, IRegisterable
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/NecessarySacrifice.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "NecessarySacrifice", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/Rapport.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rapport", "name"]).Localize
 		});
 	}
 
@@ -27,13 +27,20 @@ internal sealed class NecessarySacrificeCard : Card, IRegisterable
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = upgrade == Upgrade.A ? 1 : 2,
-			retain = upgrade == Upgrade.B,
-			exhaust = true,
+			cost = 1,
+			retain = upgrade == Upgrade.A,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
-		=>
-		[
-		];
+		=> upgrade switch
+		{
+			Upgrade.B => [
+				new AStatus() {status = ModEntry.Instance.SympathyStatus.Status, statusAmount = 1, targetPlayer = false},
+				new AStatus() {status = Status.evade, statusAmount = 1, targetPlayer = true}
+			],
+			_ => [
+				new AStatus() {status = ModEntry.Instance.SympathyStatus.Status, statusAmount = 1, targetPlayer = false}
+			],
+		};
+		
 }

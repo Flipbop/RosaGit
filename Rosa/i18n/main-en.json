@@ -11,6 +11,10 @@
         "Patient": {
             "name": "Patient",
             "description": "If this card is in your hand at the end of your turn, <c=keyword>discount</c> it."
+        },
+        "CostMod":{
+            "name": "Cost Mod",
+            "description": "This card's cost has been changed for the rest of combat."
         }
     },
     "status" : {
@@ -55,7 +59,7 @@
         },
         "Philosophy": {
             "name": "PHILOSOPHY",
-            "description": "Cards that cost 3 or more energy are <c=cardtrait>patient</c>."
+            "description": "Cards that cost 3 or more energy gain <c=cardtrait>patient</c> at the start of combat."
         },
         "Peace": {
             "name": "PEACE",

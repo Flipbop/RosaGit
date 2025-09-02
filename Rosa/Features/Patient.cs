@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Flipbop.Rosa;
 
-internal static class ImpairedExt
+internal static class PatientExt
 {
 	public static bool GetIsPatient(this Card self)
 		=> ModEntry.Instance.Helper.ModData.GetModDataOrDefault<bool>(self, "Patient");

@@ -1,0 +1,58 @@
+using Nanoray.PluginManager;
+using Nickel;
+using System.Collections.Generic;
+using System.Reflection;
+using daisyowl.text;
+using Shockah.Kokoro;
+
+namespace Flipbop.Rosa;
+
+internal sealed class CallSignCard : Card, IRegisterable, IHasCustomCardTraits
+{
+	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
+	{
+		helper.Content.Cards.RegisterCard(MethodBase.GetCurrentMethod()!.DeclaringType!.Name, new()
+		{
+			
+			CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
+			Meta = new()
+			{
+				deck = ModEntry.Instance.RosaDeck.Deck,
+				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
+				upgradesTo = [Upgrade.A, Upgrade.B]
+			},
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/CallSign.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CallSign", "name"]).Localize
+		});
+	}
+
+	public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+		=> upgrade switch
+		{
+			_ => new HashSet<ICardTraitEntry>()
+			{
+				ModEntry.Instance.PatientTrait
+			}
+		};
+	public override CardData GetData(State state)
+		=> new()
+		{
+			artTint = "FFFFFF",
+			cost = upgrade == Upgrade.A? 7:8,
+			exhaust = true,
+			retain = upgrade != Upgrade.B,
+		};
+
+	public override List<CardAction> GetActions(State s, Combat c)
+		=> upgrade switch
+		{
+			Upgrade.B => [
+				new AStatus() {status = ModEntry.Instance.SuperBoostStatus.Status, statusAmount = 2, targetPlayer = true}
+			],
+			_ => [
+				new AStatus() {status = ModEntry.Instance.SuperBoostStatus.Status, statusAmount = 1, targetPlayer = true}
+			]
+		};
+}
+	
+

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class MaximumEffortCard : Card, IRegisterable
+internal sealed class MuteCard : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,8 +18,8 @@ internal sealed class MaximumEffortCard : Card, IRegisterable
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/MaximumEffort.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "MaximumEffort", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/Mute.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Mute", "name"]).Localize
 		});
 	}
 
@@ -27,18 +27,20 @@ internal sealed class MaximumEffortCard : Card, IRegisterable
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = 2,
+			cost = 1,
+			retain = upgrade == Upgrade.A,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
-			Upgrade.A => [
-				new AAttack{ damage = GetDmg(s, 3)},
-			],
-			Upgrade.B => [
+			Upgrade.B =>
+			[
+				new AStatus() {status = ModEntry.Instance.SilenceStatus.Status, statusAmount = 1, targetPlayer = false},
+				new AStatus() {status = Status.shield, statusAmount = 1, targetPlayer = true}
 			],
 			_ => [
+				new AStatus() {status = ModEntry.Instance.SilenceStatus.Status, statusAmount = 1, targetPlayer = false}
 			]
 		};
 }

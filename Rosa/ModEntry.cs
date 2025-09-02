@@ -30,15 +30,15 @@ public sealed class ModEntry : SimpleMod
 	internal ISpriteEntry RebuttalIcon { get; }
 	internal ISpriteEntry SuperBoostIcon { get; }
 	internal ISpriteEntry SympathyIcon { get; }
-
-
+	internal ISpriteEntry SilenceIcon { get; }
 	internal ICardTraitEntry PatientTrait { get; }
+
 	internal IStatusEntry FrazzleStatus { get; }
 	internal IStatusEntry RebuttalStatus { get; }
 	internal IStatusEntry SympathyStatus { get; }
-
-
 	internal IStatusEntry SuperBoostStatus { get; }
+	internal IStatusEntry SilenceStatus { get; }
+
 
 	public IModHelper helper { get; }
 	
@@ -49,9 +49,9 @@ public sealed class ModEntry : SimpleMod
 		typeof(FeedEgoCard),
 		typeof(PonderCard),
 		typeof(CalmDownCard),
-		typeof(ResourceSwapCard),
-		typeof(ReroutePowerCard),
-		typeof(RewriteCard),
+		typeof(DiplomacyCard),
+		typeof(CensorCard),
+		typeof(MuteCard),
 		typeof(SquabbleCard),
 	];
 
@@ -61,16 +61,16 @@ public sealed class ModEntry : SimpleMod
 		typeof(SetEmUpCard),
 		typeof(GossipCard),
 		typeof(BitingRemarksCard),
-		typeof(MaximumEffortCard), 
-		typeof(NecessarySacrificeCard),
+		typeof(SoftenUpCard), 
+		typeof(RapportCard),
 	];
 
 	internal static IReadOnlyList<Type> RareCardTypes { get; } = [
 		typeof(ToxicMentalityCard),
 		typeof(RebuttalCard),
-		typeof(CleanSlateCard),
-		typeof(ApologizeNextLoopCard),
-		typeof(DefensivePositionsCard),
+		typeof(BassBoosterCard),
+		typeof(CallSignCard),
+		typeof(TranquilityCard),
 	];
 
 	internal static IReadOnlyList<Type> SpecialCardTypes { get; } = [
@@ -81,17 +81,18 @@ public sealed class ModEntry : SimpleMod
 		= [..CommonCardTypes, ..UncommonCardTypes, ..RareCardTypes, typeof(RosaExeCard), ..SpecialCardTypes];
 
 	internal static IReadOnlyList<Type> CommonArtifacts { get; } = [
-		typeof(EnhancedToolsArtifact),
-		typeof(ReusableMaterialsArtifact),
-		typeof(KickstartArtifact),
-		typeof(MagnifiedLasersArtifact),
-		typeof(UpgradedTerminalArtifact), 
+		typeof(DiplomaArtifact),
+		typeof(EgoArtifact),
+		typeof(NumberTicketArtifact),
+		
 	];
 
 	internal static IReadOnlyList<Type> BossArtifacts { get; } = [
-		typeof(RetainerArtifact),
-		typeof(ExpensiveEquipmentArtifact),
-		typeof(PowerEchoArtifact), 
+		typeof(PhilosophyArtifact),
+		typeof(ThinkingCapArtifact),
+		typeof(PeaceArtifact), 
+		typeof(BrainFoodArtifact),
+		//typeof(BroadcastHubArtifact), 
 	];
 
 	/*internal static IReadOnlyList<Type> DuoArtifacts { get; } = [
@@ -118,12 +119,12 @@ public sealed class ModEntry : SimpleMod
 
 	public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
 	{
-		PatientIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Improved.png")); 
+		PatientIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Patient.png")); 
 		FrazzleIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Frazzle.png"));
 		RebuttalIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Rebuttal.png"));
 		SuperBoostIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/SuperBoost.png"));
 		SympathyIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Sympathy.png"));
-
+		SilenceIcon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Icons/Silence.png"));
 		this.helper = helper;
 		
 
@@ -163,7 +164,6 @@ public sealed class ModEntry : SimpleMod
 				}
 			]
 		});
-		
 		
 		RosaDeck = helper.Content.Decks.RegisterDeck("Rosa", new()
 		{
@@ -210,7 +210,7 @@ public sealed class ModEntry : SimpleMod
 				cards = [
 					new TalkingPointsCard(),
 					new HurtfulWordsCard(),
-					new ReroutePowerCard(),
+					new CensorCard(),
 					new CalmDownCard(),
 					new CannonColorless(),
 					new DodgeColorless()
@@ -292,6 +292,18 @@ public sealed class ModEntry : SimpleMod
 			Description = AnyLocalizations.Bind(["status", "Sympathy", "description"])
 				.Localize
 		});
+		SilenceStatus = ModEntry.Instance.Helper.Content.Statuses.RegisterStatus("Silence", new()
+		{
+			Definition = new()
+			{
+				icon = SilenceIcon.Sprite,
+				color = new("312351"),
+				isGood = false,
+			},
+			Name = AnyLocalizations.Bind([ "status", "Silence", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "Silence", "description"])
+				.Localize
+		});
 
 		helper.ModRegistry.AwaitApi<IMoreDifficultiesApi>(
 			"TheJazMaster.MoreDifficulties",
@@ -312,6 +324,7 @@ public sealed class ModEntry : SimpleMod
 		_ = new FrazzleManager();
 		_ = new RebuttalManager();
 		_ = new SuperBoostManager();
+		_ = new SympathyManager();
 		
 		/*_ = new DialogueExtensions();
 		_ = new CombatDialogue();

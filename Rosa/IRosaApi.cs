@@ -13,6 +13,11 @@ public interface IRosaApi
 	IStatusEntry FrazzleStatus { get; }
 	IStatusEntry RebuttalStatus { get; }
 	IStatusEntry SuperBoostStatus { get; }
-
-
+	IStatusEntry SympathyStatus { get; }
+	IStatusEntry SilenceStatus { get; }
+	Tooltip GetFrazzleTooltip();
+	Tooltip GetRebuttalTooltip();
+	Tooltip GetSuperBoostTooltip();
+	Tooltip GetSympathyTooltip();
+	Tooltip GetSilenceTooltip();
 }

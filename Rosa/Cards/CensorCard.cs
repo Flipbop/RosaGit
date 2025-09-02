@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Flipbop.Rosa;
 
-internal sealed class RewriteCard : Card, IRegisterable
+internal sealed class CensorCard : Card, IRegisterable, IHasCustomCardTraits
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,30 +18,35 @@ internal sealed class RewriteCard : Card, IRegisterable
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/Rewrite.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rewrite", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/Censor.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Censor", "name"]).Localize
 		});
 	}
-
+	public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+		=> upgrade switch
+		{
+			Upgrade.A => new HashSet<ICardTraitEntry>()
+			{
+				ModEntry.Instance.PatientTrait
+			},
+			_ => new HashSet<ICardTraitEntry>()
+		};
 	public override CardData GetData(State state)
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = 0,
-			retain = true,
+			cost = upgrade == Upgrade.B ? 1 : 2,
 			infinite = upgrade == Upgrade.B,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
-			Upgrade.A =>
-			[
-				new AReverseHand(),
-				new AAttack { damage = GetDmg(s, 1) },
+			Upgrade.B => [
+				new AStatus() {status = ModEntry.Instance.SilenceStatus.Status, statusAmount = 1, targetPlayer = false}
 			],
 			_ => [
-				new AReverseHand(),
+				new AStatus() {status = ModEntry.Instance.SilenceStatus.Status, statusAmount = 2, targetPlayer = false}
 			]
 		};
 }

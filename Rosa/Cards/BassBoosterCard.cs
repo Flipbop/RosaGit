@@ -1,11 +1,15 @@
 using Nanoray.PluginManager;
+
+
 using Nickel;
 using System.Collections.Generic;
 using System.Reflection;
+using daisyowl.text;
+using Shockah.Kokoro;
 
 namespace Flipbop.Rosa;
 
-internal sealed class DefensivePositionsCard : Card, IRegisterable
+internal sealed class BassBoosterCard : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,8 +22,8 @@ internal sealed class DefensivePositionsCard : Card, IRegisterable
 				rarity = ModEntry.GetCardRarity(MethodBase.GetCurrentMethod()!.DeclaringType!),
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/DefensivePositions.png")).Sprite,
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "DefensivePositions", "name"]).Localize
+			Art = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/BassBooster.png")).Sprite,
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "BassBooster", "name"]).Localize
 		});
 	}
 
@@ -27,20 +31,21 @@ internal sealed class DefensivePositionsCard : Card, IRegisterable
 		=> new()
 		{
 			artTint = "FFFFFF",
-			cost = upgrade == Upgrade.B? 3 : 2,
-			exhaust = upgrade == Upgrade.B
+			cost = upgrade == Upgrade.A ? 3 : 4,
+			exhaust = true
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
 		=> upgrade switch
 		{
-			Upgrade.A => [
-				new AStatus {targetPlayer = true, status = Status.tempShield, statusAmount = 4},
-			],
 			Upgrade.B => [
+				new AStatus() {status = ModEntry.Instance.SuperBoostStatus.Status, statusAmount = 1, targetPlayer = false},
+				new AStatus() {status = Status.boost, statusAmount = 2, targetPlayer = false}
 			],
 			_ => [
-				new AStatus {targetPlayer = true, status = Status.tempShield, statusAmount = 2},
-			]
+				new AStatus() {status = ModEntry.Instance.SuperBoostStatus.Status, statusAmount = 1, targetPlayer = false}
+			],
 		};
+
 }
+
