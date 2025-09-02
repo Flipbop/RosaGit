@@ -82,7 +82,7 @@ public sealed class ModEntry : SimpleMod
 
 	internal static IReadOnlyList<Type> CommonArtifacts { get; } = [
 		typeof(DiplomaArtifact),
-		typeof(EgoArtifact),
+		//typeof(EgoArtifact),
 		typeof(NumberTicketArtifact),
 		
 	];
@@ -92,7 +92,6 @@ public sealed class ModEntry : SimpleMod
 		typeof(ThinkingCapArtifact),
 		typeof(PeaceArtifact), 
 		typeof(BrainFoodArtifact),
-		//typeof(BroadcastHubArtifact), 
 	];
 
 	/*internal static IReadOnlyList<Type> DuoArtifacts { get; } = [
@@ -210,9 +209,9 @@ public sealed class ModEntry : SimpleMod
 				cards = [
 					new TalkingPointsCard(),
 					new HurtfulWordsCard(),
-					new CensorCard(),
+					new SquabbleCard(),
 					new CalmDownCard(),
-					new CannonColorless(),
+					new BasicShieldColorless(),
 					new DodgeColorless()
 					]
 			},

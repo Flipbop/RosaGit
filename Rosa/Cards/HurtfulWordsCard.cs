@@ -24,13 +24,14 @@ internal sealed class HurtfulWordsCard : Card, IRegisterable, IHasCustomCardTrai
 	}
 
 	public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
-		=> upgrade switch
+	{
+		this.SetIsPatient(true);
+		HashSet<ICardTraitEntry> cardTraitEntries = new HashSet<ICardTraitEntry>()
 		{
-			_ => new HashSet<ICardTraitEntry>()
-			{
-				ModEntry.Instance.PatientTrait
-			}
+			ModEntry.Instance.PatientTrait
 		};
+		return cardTraitEntries;
+	}
 
 	public override CardData GetData(State state)
 		=> new()

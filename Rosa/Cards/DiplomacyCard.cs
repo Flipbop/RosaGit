@@ -8,10 +8,6 @@ namespace Flipbop.Rosa;
 
 internal sealed class DiplomacyCard : Card, IRegisterable
 {
-	private static Spr _flippedSprite;
-	private static Spr _floppedSprite;
-	private static Spr _aSprite;
-	private static Spr _bSprite;
 
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -25,7 +21,7 @@ internal sealed class DiplomacyCard : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Art = helper.Content.Sprites
-				.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/ResourceSwapB.png")).Sprite,
+				.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Cards/Diplomacy.png")).Sprite,
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Diplomacy", "name"]).Localize
 		});
 		

@@ -33,6 +33,6 @@ internal sealed class FrazzleManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 				combat.Queue(new AStatus(){status = ModEntry.Instance.FrazzleStatus.Status, statusAmount = -1, targetPlayer = false});
 			}
 
-			});
+		});
 	}
 }

@@ -28,7 +28,7 @@ internal sealed class EgoArtifact : Artifact, IRegisterable
 		int statusCount = 0;
 		for (int i = 0; i >= combat.otherShip.statusEffects.Count; i++)
 		{
-			if ()
+			//if ()
 		}
 
 	}

@@ -22,14 +22,16 @@ internal sealed class CalmDownCard : Card, IRegisterable, IHasCustomCardTraits
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CalmDown", "name"]).Localize
 		});
 	}
+
 	public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
-		=> upgrade switch
+	{
+		this.SetIsPatient(true);
+		HashSet<ICardTraitEntry> cardTraitEntries = new HashSet<ICardTraitEntry>()
 		{
-			_ => new HashSet<ICardTraitEntry>()
-			{
-				ModEntry.Instance.PatientTrait
-			}
+			ModEntry.Instance.PatientTrait
 		};
+		return cardTraitEntries;
+	}
 	
 	public override CardData GetData(State state)
 		=> new()

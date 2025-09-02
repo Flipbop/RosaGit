@@ -41,6 +41,7 @@ internal sealed class PhilosophyArtifact : Artifact, IRegisterable
 			if (card.GetCurrentCost(state) >= 3 )
 			{
 				card.SetIsPatient(true);
+				ModEntry.Instance.helper.Content.Cards.SetCardTraitOverride(state, card, ModEntry.Instance.PatientTrait, true, false);
 			}
 		}
 	}
@@ -52,6 +53,7 @@ internal sealed class PhilosophyArtifact : Artifact, IRegisterable
 			if (card.GetCurrentCost(state) >= 3 )
 			{
 				card.SetIsPatient(false);
+				ModEntry.Instance.helper.Content.Cards.SetCardTraitOverride(state, card, ModEntry.Instance.PatientTrait, false, false);
 			}
 		}
 	}

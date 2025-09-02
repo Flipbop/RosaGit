@@ -14,11 +14,20 @@ internal sealed class SuperBoostManager : IKokoroApi.IV2.IStatusRenderingApi.IHo
 	public SuperBoostManager()
 	{
 		ModEntry.Instance.KokoroApi.StatusRendering.RegisterHook(this);
-		ModEntry.Instance.Helper.Events.RegisterBeforeArtifactsHook(nameof(Artifact.ModifyStatusAmount),
-			(int baseAmount, Card card, State state, Combat? combat) =>
+		ModEntry.Instance.KokoroApi.StatusLogic.RegisterHook(new Hook());
+	}
+
+	private sealed class Hook : IKokoroApi.IV2.IStatusLogicApi.IHook
+	{
+		public int ModifyStatusChange(IKokoroApi.IV2.IStatusLogicApi.IHook.IModifyStatusChangeArgs args)
+		{
+			var isPlayerShip = args.Ship.isPlayerShip;
+			if (args.Status != Status.shield || args.Status != Status.tempShield)
 			{
-				var stacks = state.ship.Get(ModEntry.Instance.SuperBoostStatus.Status);
-				return stacks;
-			});
+				if (args.OldAmount >= args.NewAmount || args.NewAmount <= 0) return args.NewAmount;
+				var superBoost = args.Ship.Get(ModEntry.Instance.SuperBoostStatus.Status);
+				return superBoost + args.NewAmount;
+			} else return args.NewAmount;
+		}
 	}
 }

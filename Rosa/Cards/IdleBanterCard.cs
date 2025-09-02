@@ -40,20 +40,20 @@ internal sealed class IdleBanterCard : Card, IRegisterable
 			[
 				new ADrawCard() {count = 3},
 				new AVariableHint() {hand = true},
-				new AStatus() {status = Status.tempShield, xHint = 1, statusAmount = c.hand.Count},
+				new AStatus() {status = Status.tempShield, xHint = 1, statusAmount = c.hand.Count, targetPlayer = true},
 			],
 			Upgrade.B =>
 			[
 				new ADrawCard() {count = 3},
 				new AVariableHint() {hand = true},
-				new AStatus() {status = Status.tempShield, xHint = 1, statusAmount = c.hand.Count},
+				new AStatus() {status = Status.tempShield, xHint = 1, statusAmount = c.hand.Count, targetPlayer = true},
 				new AEndTurn()
 			],
 			_ =>
 			[
 				new ADrawCard() {count = 1},
 				new AVariableHint() {hand = true},
-				new AStatus() {status = Status.tempShield, xHint = 1, statusAmount = c.hand.Count},
+				new AStatus() {status = Status.tempShield, xHint = 1, statusAmount = c.hand.Count, targetPlayer = true},
 				new AEndTurn()
 			]
 

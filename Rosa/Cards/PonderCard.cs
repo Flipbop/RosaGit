@@ -24,19 +24,19 @@ internal sealed class PonderCard : Card, IRegisterable, IHasCustomCardTraits
 	}
 
 	public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
-		=> upgrade switch
+	{
+		this.SetIsPatient(true);
+		HashSet<ICardTraitEntry> cardTraitEntries = new HashSet<ICardTraitEntry>()
 		{
-			_ => new HashSet<ICardTraitEntry>()
-			{
-				ModEntry.Instance.PatientTrait
-			}
+			ModEntry.Instance.PatientTrait
 		};
+		return cardTraitEntries;
+	}
 	public override CardData GetData(State state)
 		=> new()
 		{
 			artTint = "FFFFFF",
 			cost = upgrade == Upgrade.B? 2 : 1,
-			description = ModEntry.Instance.Localizations.Localize(["card", "Ponder", "description", upgrade.ToString()])
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)

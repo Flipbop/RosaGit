@@ -67,11 +67,7 @@
         },
         "BrainFood": {
             "name": "BRAIN FOOD",
-            "description": "At the end of your turn, decrease the energy cost of all cards in your hand by 1 for the rest of combat. <c=downside>When a card is played, increase it's energy cost by 1 for the rest of combat.</c>"
-        },
-        "BroadcastHub": {
-            "name": "BROADCAST HUB",
-            "description": "Gain 1 <c=status>ENERGY</c> every turn. <c=downside>Create a comms bay to the left of your cockpit.</c>"
+            "description": "At the end of your turn, <c=cardtrait>discount</c> all cards in your hand. <c=cardtrait>Discount</c> and <c=cardtrait>Expensive</c> no longer decay when used. <c=downside>When a card is played, increase it's energy cost by 1.</c> "
         }
         /*"Duo": {
             "CleoBooks": {
@@ -116,7 +112,7 @@
             "name": "Talking Points"
         },
         "HurtfulWords": {
-            "name": "HurtfulWords"
+            "name": "Hurtful Words"
         },
         "FeedEgo": {
             "name": "Feed Ego"
@@ -157,7 +153,7 @@
             "name": "Gossip"
         },
         "BitingRemarks": {
-            "name": "BitingRemarks"
+            "name": "Biting Remarks"
         },
         "Rapport": {
             "name": "Rapport"

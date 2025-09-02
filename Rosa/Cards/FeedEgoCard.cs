@@ -7,7 +7,6 @@ namespace Flipbop.Rosa;
 
 internal sealed class FeedEgoCard : Card, IRegisterable
 {
-	private static Spr _bSprite;
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
 		helper.Content.Cards.RegisterCard(MethodBase.GetCurrentMethod()!.DeclaringType!.Name, new()
