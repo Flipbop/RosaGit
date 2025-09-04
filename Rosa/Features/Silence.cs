@@ -9,7 +9,6 @@ namespace Flipbop.Rosa;
 
 internal sealed class SilenceManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 {
-    internal static IStatusEntry SilenceStatus { get; private set; } = null!;
     public SilenceManager()
     {
         ModEntry.Instance.KokoroApi.StatusLogic.RegisterHook(new StatusLogicHook(), 0);
@@ -28,7 +27,7 @@ internal sealed class SilenceManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
         var card = __instance;
         if (card is null) return;
         if (s.route is not Combat c) return;
-        if (s.ship.Get(SilenceStatus.Status) <= 0) return;
+        if (s.ship.Get(ModEntry.Instance.SilenceStatus.Status) <= 0) return;
         if (s.FindCard(card.uuid) is null) return;
         foreach (var actions in __result)
         {
@@ -43,11 +42,11 @@ internal sealed class SilenceManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
     }
     private static void AStatus_Begin_Postfix(G g, State s, Combat c, AStatus __instance)
     {
-        if (__instance.status == SilenceStatus.Status)
+        if (__instance.status == ModEntry.Instance.SilenceStatus.Status)
         {
             if (__instance.targetPlayer == false)
             {
-                if (c.otherShip.Get(SilenceStatus.Status) < 1) return;
+                if (c.otherShip.Get(ModEntry.Instance.SilenceStatus.Status) < 1) return;
                 foreach (var part in c.otherShip.parts)
                 {
                     if (part is null) continue;
@@ -64,7 +63,7 @@ internal sealed class SilenceManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
     {
         public bool HandleStatusTurnAutoStep(IKokoroApi.IV2.IStatusLogicApi.IHook.IHandleStatusTurnAutoStepArgs args)
         {
-            if (args.Status == SilenceStatus.Status)
+            if (args.Status == ModEntry.Instance.SilenceStatus.Status)
             {
                 if (args.Timing == IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnEnd)
                 {
@@ -76,7 +75,7 @@ internal sealed class SilenceManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
                 }
                 else
                 {
-                    if (args.Combat.otherShip.Get(SilenceStatus.Status) > 2)
+                    if (args.Combat.otherShip.Get(ModEntry.Instance.SilenceStatus.Status) > 2)
                     {
                         foreach (var part in args.Combat.otherShip.parts)
                         {
