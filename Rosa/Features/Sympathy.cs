@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Reflection;
 using HarmonyLib;
 using Nickel;
 using Shockah.Kokoro;
@@ -14,7 +15,10 @@ internal sealed class SympathyManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 	public SympathyManager()
 	{
 		ModEntry.Instance.KokoroApi.StatusRendering.RegisterHook(this);
-		
+		ModEntry.Instance.Harmony.Patch(
+			original: AccessTools.DeclaredMethod(typeof(AMove), nameof(AMove.Begin)),
+			prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AMove_Begin_Prefix))
+		);
 		
 		
 		
@@ -36,5 +40,19 @@ internal sealed class SympathyManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 			}
 
 		});
+	}
+	private static void AMove_Begin_Prefix(State s, Combat c, AMove __instance)
+	{
+		
+		Ship ship = __instance.targetPlayer ? c.otherShip : s.ship;
+
+		if (__instance.dir > 0)
+		{
+			c.Queue(new AMove {targetPlayer = !__instance.targetPlayer, dir = ship.Get(ModEntry.Instance.SympathyStatus.Status)});
+		}
+		if (__instance.dir < 0)
+		{
+			c.Queue(new AMove {targetPlayer = !__instance.targetPlayer, dir = -ship.Get(ModEntry.Instance.SympathyStatus.Status)});
+		}
 	}
 }
