@@ -20,9 +20,6 @@ internal sealed class SympathyManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 			prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AMove_Begin_Prefix)),
 			postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AMove_Begin_Postfix))
 		);
-		
-		
-		
 		ModEntry.Instance.Helper.Events.RegisterBeforeArtifactsHook(nameof(Artifact.OnTurnEnd), (State state, Combat combat) =>
 		{
 			if (combat.isPlayerTurn)

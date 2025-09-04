@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using HarmonyLib;
 using Nickel;
-using Nanoray.PluginManager;
 using System.Reflection;
 using FSPRO;
-using Microsoft.Extensions.Logging;
 using Shockah.Kokoro;
 
 namespace Flipbop.Rosa;
 
-internal sealed class SilenceManager : IRegisterable
+internal sealed class SilenceManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 {
     internal static IStatusEntry SilenceStatus { get; private set; } = null!;
-    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
+    public SilenceManager()
     {
         ModEntry.Instance.KokoroApi.StatusLogic.RegisterHook(new StatusLogicHook(), 0);
         ModEntry.Instance.Harmony.Patch(
