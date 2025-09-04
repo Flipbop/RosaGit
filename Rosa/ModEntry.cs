@@ -324,6 +324,7 @@ public sealed class ModEntry : SimpleMod
 		_ = new RebuttalManager();
 		_ = new SuperBoostManager();
 		_ = new SympathyManager();
+		_ = new SilenceManager();
 		
 		/*_ = new DialogueExtensions();
 		_ = new CombatDialogue();
