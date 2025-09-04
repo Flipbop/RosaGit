@@ -45,15 +45,16 @@ internal sealed class SympathyManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 	private static void AMove_Begin_Prefix(State s, Combat c, AMove __instance, out int __state)
 	{
 		
-		Ship ship = __instance.targetPlayer ? c.otherShip : s.ship;
+		Ship shipCheck = __instance.targetPlayer ? s.ship : c.otherShip;
 
-		__state = ship.x;
+		__state = shipCheck.x;
 	}
 	
 	private static void AMove_Begin_Postfix(AMove __instance, State s, Combat c, in int __state)
 	{
+		Ship shipCheck = __instance.targetPlayer ? s.ship : c.otherShip;
 		Ship ship = __instance.targetPlayer ? c.otherShip : s.ship;
-		if (ship.x == __state)
+		if (shipCheck.x == __state)
 			return;
 		if (__instance.dir > 0)
 		{
