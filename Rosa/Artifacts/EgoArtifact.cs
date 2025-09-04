@@ -1,4 +1,5 @@
-﻿using Nanoray.PluginManager;
+﻿using System.Collections.Generic;
+using Nanoray.PluginManager;
 using Nickel;
 using System.Reflection;
 
@@ -26,10 +27,14 @@ internal sealed class EgoArtifact : Artifact, IRegisterable
 	{
 		base.OnTurnEnd(state, combat);
 		int statusCount = 0;
-		for (int i = 0; i >= combat.otherShip.statusEffects.Count; i++)
+		foreach (Status statusEffect in combat.otherShip.statusEffects.Keys)
 		{
-			//if ()
+			if (combat.otherShip.Get(statusEffect) >= 1 && DB.statuses[statusEffect].isGood)
+			{
+				statusCount++;
+			}
 		}
+		combat.Queue(new AStatus() {status = Status.tempShield, statusAmount = statusCount, targetPlayer = true});
 
 	}
 }

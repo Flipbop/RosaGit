@@ -102,9 +102,7 @@ public sealed class ModEntry : SimpleMod
 		typeof(CleoIsaacArtifact),
 		typeof(CleoMaxArtifact),
 		typeof(CleoPeriArtifact),
-		typeof(CleoRiggsArtifact), 
-		typeof(CleoJohnsonArtifact),
-		typeof(CleoSogginsArtifact),
+		typeof(CleoRiggsArtifact) 
 	];*/
 
 	internal static IEnumerable<Type> AllArtifactTypes
