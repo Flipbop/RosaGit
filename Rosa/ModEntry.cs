@@ -248,7 +248,7 @@ public sealed class ModEntry : SimpleMod
 			Definition = new()
 			{
 				icon = FrazzleIcon.Sprite,
-				color = new("312351"),
+				color = new("ff3838"),
 				isGood = false,
 			},
 			Name = AnyLocalizations.Bind([ "status", "Frazzle", "name"]).Localize,
@@ -260,7 +260,7 @@ public sealed class ModEntry : SimpleMod
 			Definition = new()
 			{
 				icon = RebuttalIcon.Sprite,
-				color = new("312351"),
+				color = new("88d890"),
 				isGood = true,
 			},
 			Name = AnyLocalizations.Bind([ "status", "Rebuttal", "name"]).Localize,
@@ -272,7 +272,7 @@ public sealed class ModEntry : SimpleMod
 			Definition = new()
 			{
 				icon = SuperBoostIcon.Sprite,
-				color = new("312351"),
+				color = new("2294cf"),
 				isGood = true,
 			},
 			Name = AnyLocalizations.Bind([ "status", "SuperBoost", "name"]).Localize,
@@ -284,7 +284,7 @@ public sealed class ModEntry : SimpleMod
 			Definition = new()
 			{
 				icon = SympathyIcon.Sprite,
-				color = new("312351"),
+				color = new("9fd0ff"),
 				isGood = false,
 			},
 			Name = AnyLocalizations.Bind([ "status", "Sympathy", "name"]).Localize,
@@ -296,7 +296,7 @@ public sealed class ModEntry : SimpleMod
 			Definition = new()
 			{
 				icon = SilenceIcon.Sprite,
-				color = new("312351"),
+				color = new("c1ced6"),
 				isGood = false,
 			},
 			Name = AnyLocalizations.Bind([ "status", "Silence", "name"]).Localize,

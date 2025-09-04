@@ -17,7 +17,8 @@ internal sealed class SympathyManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 		ModEntry.Instance.KokoroApi.StatusRendering.RegisterHook(this);
 		ModEntry.Instance.Harmony.Patch(
 			original: AccessTools.DeclaredMethod(typeof(AMove), nameof(AMove.Begin)),
-			prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AMove_Begin_Prefix))
+			prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AMove_Begin_Prefix)),
+			postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AMove_Begin_Postfix))
 		);
 		
 		
@@ -41,18 +42,27 @@ internal sealed class SympathyManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 
 		});
 	}
-	private static void AMove_Begin_Prefix(State s, Combat c, AMove __instance)
+	private static void AMove_Begin_Prefix(State s, Combat c, AMove __instance, out int __state)
 	{
 		
 		Ship ship = __instance.targetPlayer ? c.otherShip : s.ship;
 
+		__state = ship.x;
+	}
+	
+	private static void AMove_Begin_Postfix(AMove __instance, State s, Combat c, in int __state)
+	{
+		Ship ship = __instance.targetPlayer ? c.otherShip : s.ship;
+		if (ship.x == __state)
+			return;
 		if (__instance.dir > 0)
-		{
-			c.Queue(new AMove {targetPlayer = !__instance.targetPlayer, dir = ship.Get(ModEntry.Instance.SympathyStatus.Status)});
-		}
-		if (__instance.dir < 0)
 		{
 			c.Queue(new AMove {targetPlayer = !__instance.targetPlayer, dir = -ship.Get(ModEntry.Instance.SympathyStatus.Status)});
 		}
+		if (__instance.dir < 0)
+		{
+			c.Queue(new AMove {targetPlayer = !__instance.targetPlayer, dir = ship.Get(ModEntry.Instance.SympathyStatus.Status)});
+		}
+		
 	}
 }
