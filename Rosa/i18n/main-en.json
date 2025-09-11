@@ -67,7 +67,7 @@
         },
         "BrainFood": {
             "name": "BRAIN FOOD",
-            "description": "At the end of your turn, <c=cardtrait>discount</c> all cards in your hand. <c=cardtrait>Discount</c> and <c=cardtrait>Expensive</c> no longer decay when used. <c=downside>When a card is played, increase it's energy cost by 1.</c> "
+            "description": "At the end of your turn, decrease the energy cost of all cards in your hand by 1 for the rest of combat. <c=downside>When a card is played, increase it's energy cost by 1 for the rest of combat.</c> "
         }
         /*"Duo": {
             "CleoBooks": {

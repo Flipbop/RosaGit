@@ -29,7 +29,7 @@ internal sealed class EgoArtifact : Artifact, IRegisterable
 		int statusCount = 0;
 		foreach (Status statusEffect in combat.otherShip.statusEffects.Keys)
 		{
-			if (combat.otherShip.Get(statusEffect) >= 1 && DB.statuses[statusEffect].isGood)
+			if (combat.otherShip.Get(statusEffect) >= 1 && !DB.statuses[statusEffect].isGood)
 			{
 				statusCount++;
 			}

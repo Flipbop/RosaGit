@@ -82,7 +82,7 @@ public sealed class ModEntry : SimpleMod
 
 	internal static IReadOnlyList<Type> CommonArtifacts { get; } = [
 		typeof(DiplomaArtifact),
-		//typeof(EgoArtifact),
+		typeof(EgoArtifact),
 		typeof(NumberTicketArtifact),
 		
 	];
