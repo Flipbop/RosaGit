@@ -34,9 +34,15 @@ internal sealed class BrainFoodArtifact : Artifact, IRegisterable
 			);
 	}
 	
-	private static void ACost_Begin_Postfix(State s, Combat c, ref CardData __result, Card __instance)
+	private static void ACost_Begin_Postfix(ref CardData __result, Card __instance)
 	{
-		__result.cost = ModEntry.Instance.helper.ModData.GetModData<int>(__instance, "BrainFoodBaseCost") + ModEntry.Instance.helper.ModData.GetModData<int>(__instance, "BrainFoodOffset");
+		int baseCost = 0;
+		if (ModEntry.Instance.helper.ModData.GetModDataOrDefault<int>(__instance, "BrainFoodBaseCost", 0) <= 0)
+		{
+			baseCost = __result.cost;
+		}
+		else baseCost = ModEntry.Instance.helper.ModData.GetModDataOrDefault<int>(__instance, "BrainFoodBaseCost", 0);
+		__result.cost = baseCost + ModEntry.Instance.helper.ModData.GetModDataOrDefault<int>(__instance, "BrainFoodOffset", 0);
 	}
 
 	public override void OnCombatEnd(State state)
