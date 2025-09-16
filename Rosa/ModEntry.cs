@@ -154,7 +154,7 @@ public sealed class ModEntry : SimpleMod
 			Tooltips = (state, card) => [
 				new GlossaryTooltip($"action.{Instance.Package.Manifest.UniqueName}::Patient")
 				{
-					Icon = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Icons/Patient.png")).Sprite,
+					Icon = PatientIcon.Sprite,
 					TitleColor = Colors.cardtrait,
 					Title = Localizations.Localize(["cardTrait", "Patient", "name"]),
 					Description = Localizations.Localize(["cardTrait", "Patient", "description"])
@@ -224,22 +224,15 @@ public sealed class ModEntry : SimpleMod
 				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/GameOver/{i}.png")).Sprite)
 				.ToList()
 		});
-		/*helper.Content.Characters.V2.RegisterCharacterAnimation(new()
-		{
-			CharacterType = RosaDeck.UniqueName,
-			LoopTag = "squint",
-			Frames = Enumerable.Range(0, 3)
-				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Squint/{i}.png")).Sprite)
-				.ToList()
-		});
 		helper.Content.Characters.V2.RegisterCharacterAnimation(new()
 		{
 			CharacterType = RosaDeck.UniqueName,
-			LoopTag = "nervous",
-			Frames = Enumerable.Range(0, 5)
-				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Nervous/{i}.png")).Sprite)
+			LoopTag = "squint",
+			Frames = Enumerable.Range(0, 1)
+				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Squint/{i}.png")).Sprite)
 				.ToList()
-		});*/
+		});
+		
 
 		FrazzleStatus = ModEntry.Instance.Helper.Content.Statuses.RegisterStatus("Frazzle", new()
 		{

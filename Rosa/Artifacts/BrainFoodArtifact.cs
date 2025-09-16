@@ -75,9 +75,12 @@ internal sealed class BrainFoodArtifact : Artifact, IRegisterable
 	{
 		if (c.cardActions.Any(a => a is AEndTurn))
 			return;
-		foreach (Card card in c.hand)
+		if (s.EnumerateAllArtifacts().Any((a) => a is BrainFoodArtifact))
 		{
-			ModEntry.Instance.helper.ModData.SetModData(card, "BrainFoodOffset", ModEntry.Instance.helper.ModData.GetModData<int>(card, "BrainFoodOffset") -1);
-		} 
+			foreach (Card card in c.hand)
+			{
+				ModEntry.Instance.helper.ModData.SetModData(card, "BrainFoodOffset", ModEntry.Instance.helper.ModData.GetModDataOrDefault<int>(card, "BrainFoodOffset", 0) -1);
+			} 
+		}
 	}
 }
