@@ -1,6 +1,6 @@
 {
   "UniqueName": "Flipbop.Rosa",
-  "Version": "1.0.3",
+  "Version": "1.0.2",
   "RequiredApiVersion": "1.6.0",
   "EntryPointAssembly": "Rosa.dll",
   "LoadPhase": "AfterDbInit",

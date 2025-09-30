@@ -53,6 +53,9 @@ internal sealed class SympathyManager : IKokoroApi.IV2.IStatusRenderingApi.IHook
 		Ship ship = __instance.targetPlayer ? c.otherShip : s.ship;
 		if (shipCheck.x == __state)
 			return;
+		var stacks = ship.Get(ModEntry.Instance.SympathyStatus.Status);
+		if (stacks <= 0)
+			return;
 		if (__instance.dir > 0)
 		{
 			c.Queue(new AMove {targetPlayer = !__instance.targetPlayer, dir = -ship.Get(ModEntry.Instance.SympathyStatus.Status)});
