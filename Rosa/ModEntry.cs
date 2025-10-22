@@ -183,7 +183,7 @@ public sealed class ModEntry : SimpleMod
 			{
 				CharacterType = RosaDeck.UniqueName,
 				LoopTag = "neutral",
-				Frames = Enumerable.Range(0, 1)
+				Frames = Enumerable.Range(0, 4)
 					.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Neutral/{i}.png")).Sprite)
 					.ToList()
 			},
@@ -228,7 +228,7 @@ public sealed class ModEntry : SimpleMod
 		{
 			CharacterType = RosaDeck.UniqueName,
 			LoopTag = "squint",
-			Frames = Enumerable.Range(0, 1)
+			Frames = Enumerable.Range(0, 4)
 				.Select(i => helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile($"assets/Character/Squint/{i}.png")).Sprite)
 				.ToList()
 		});
