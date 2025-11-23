@@ -25,7 +25,7 @@ internal sealed class NumberTicketArtifact : Artifact, IRegisterable
 		});
 		
 		ModEntry.Instance.Harmony.Patch(
-			original: AccessTools.DeclaredMethod(typeof(AMove), nameof(ADrawCard.Begin)),
+			original: AccessTools.DeclaredMethod(typeof(ADrawCard), nameof(ADrawCard.Begin)),
 			prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(ADraw_Begin_Prefix)),
 			postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(ADraw_Begin_Postfix))
 		);
