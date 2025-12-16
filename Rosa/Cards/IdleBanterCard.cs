@@ -38,7 +38,7 @@ internal sealed class IdleBanterCard : Card, IRegisterable
 		{
 			Upgrade.A =>
 			[
-				new ADrawCard() {count = 3},
+				new ADrawCard() {count = 1},
 				new AVariableHint() {hand = true},
 				new AStatus() {status = Status.tempShield, xHint = 1, statusAmount = c.hand.Count, targetPlayer = true},
 			],

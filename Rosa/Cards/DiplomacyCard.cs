@@ -32,7 +32,7 @@ internal sealed class DiplomacyCard : Card, IRegisterable
 		{
 			artTint = "FFFFFF",
 			cost = upgrade == Upgrade.B? 2:1,
-			exhaust = upgrade == Upgrade.B,
+			exhaust = upgrade != Upgrade.B,
 		};
 
 	public override List<CardAction> GetActions(State s, Combat c)
