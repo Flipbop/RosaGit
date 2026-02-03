@@ -39,7 +39,7 @@ internal sealed class NumberTicketArtifact : Artifact, IRegisterable
 	public override void OnDrawCard(State state, Combat combat, int count)
 	{
 		base.OnDrawCard(state, combat, count);
-		if (combat.hand.Count >9)
+		if (combat.hand.Count >9 && state.EnumerateAllArtifacts().Any((a) => a is NumberTicketArtifact))
 		{
 			combat.Queue(new AStatus() {status = Status.drawNextTurn, statusAmount = 1, targetPlayer = true});
 		}

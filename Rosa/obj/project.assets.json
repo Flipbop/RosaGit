@@ -106,7 +106,7 @@
     "/Users/christopherfranson/.nuget/packages/": {}
   },
   "project": {
-    "version": "1.0.5",
+    "version": "1.0.6",
     "restore": {
       "projectUniqueName": "/Users/christopherfranson/Desktop/Cobalt Core Mods/RosaGit/Rosa/Rosa.csproj",
       "projectName": "Rosa",
